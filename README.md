@@ -36,7 +36,7 @@ Python 复现 AI 顶会论文经典实验图，配套小红书"跟着顶刊学�
 | 20 | [Self-Discover: LLMs Self-Compose Reasoning Structures](./ep20_SelfDiscover/) | ICML 2024 | 分组柱形 / 散点图 / 分组柱形 |
 | 21 | [Voyager: An Open-Ended Embodied Agent with Large Language Models](./ep21_Voyager/) | arXiv | 折线图 / 折线图 / 折线图 |
 | 22 | [RxEval: A Prescription-Level Benchmark for Evaluating LLM Medication Recommendation](./ep22_RxEval/) | arXiv 2026.05 (2605.14543) | 长尾折线 / 柱形图 / 对比直方图 |
-| 23 | [AgentKernelArena: Generalization-Aware Benchmarking of GPU Kernel Optimization Agents](./ep23_AgentKernelArena/) | arXiv 2026.05 (2605.16819) | grouped_bar / stacked_bar / scatter |
+| 23 | [AgentKernelArena: Generalization-Aware Benchmarking of GPU Kernel Optimization Agents](./ep23_AgentKernelArena/) | arXiv 2026.05 (2605.16819) | 分组柱形图 / 堆叠柱形图 / 散点图 |
 
 ## License
 
