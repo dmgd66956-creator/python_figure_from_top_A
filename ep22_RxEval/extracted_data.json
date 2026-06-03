@@ -1,0 +1,108 @@
+{
+  "paper": {
+    "title": "RxEval: A Prescription-Level Benchmark for Evaluating LLM Medication Recommendation",
+    "venue": "arXiv 2026.05 (2605.14543)",
+    "authors": "Shuhao Chen, Weisen Jiang, Chang Wang, Xun Zhou et al.",
+    "summary": "本文提出 RxEval，首个处方级 LLM 用药推荐多选题基准，从 EHR 抽取 1547 题、覆盖 18 个 ICD 章节与 969 种药物。创新在于将单标签 MedQA 升级为药物子集多选 (avg 7.03 选项/2.03 正确) 并联合编码诊疗轨迹。结果显示在 16 款 LLM 上 RxEval 平均准确率比 MedQA 低约 30%，GPT-5 与 Gemini-2.5-Pro 在长轨迹末段 F1 大幅下滑。"
+  },
+  "figure1": {
+    "original_ref": "Figure 3(c) Medication frequency",
+    "chart_type": "line",
+    "description": "RxEval 药物长尾分布（log-log）：969 种药物按出现频次排序，三条线分别是 All options / Correct / Distractor",
+    "structure": {
+      "subplots": 1,
+      "x_axis": {"meaning": "Medication rank (log scale)", "type": "continuous_log", "range": [1, 1000]},
+      "y_axis": {"meaning": "Option occurrences (log scale)", "type": "continuous_log", "range": [1, 300]},
+      "background_fill": "#e8eef6",
+      "spines": {"left": true, "bottom": true, "top": false, "right": false},
+      "grid": false,
+      "series_count": 3,
+      "series": [
+        {"name": "All options",  "color": "#2070c0", "style": "solid line"},
+        {"name": "Correct",      "color": "#60a060", "style": "solid line"},
+        {"name": "Distractor",   "color": "#d06060", "style": "solid line"}
+      ],
+      "legend": {"location": "upper right", "frameon": false, "ncol": 1}
+    },
+    "calibration": {
+      "method": "pixel_calibration",
+      "tool": "trace_topmost on 6x render",
+      "x_tick_px": {"10^0": 140, "10^1": 334, "10^2": 528, "10^3": 722},
+      "y_tick_px": {"10^0": 524, "10^1": 339, "10^2": 155}
+    },
+    "data": {
+      "source_file": "cache/fig1_curves.json",
+      "summary_stats": {
+        "all_options_top1": 281,
+        "all_options_max_rank": 970,
+        "correct_top1": 140,
+        "correct_max_rank": 436,
+        "distractor_top1": 257,
+        "distractor_max_rank": 740
+      }
+    },
+    "source": "Figure 3(c) 像素校准提取，PDF tick label 中心定位 + 6x 渲染追顶法",
+    "confidence": "log 坐标误差 ±5%"
+  },
+  "figure2": {
+    "original_ref": "Figure 3(d) Answers per MCQ",
+    "chart_type": "bar",
+    "description": "RxEval 题目答案数量分布：1 答的占大多数（853 题），多答案数量快速衰减",
+    "structure": {
+      "subplots": 1,
+      "x_axis": {"meaning": "# Answers", "type": "categorical", "categories": ["1","2","3","4","5","6","≥7"]},
+      "y_axis": {"meaning": "# MCQs", "type": "continuous", "range": [0, 800]},
+      "background_fill": "white",
+      "spines": {"left": true, "bottom": true, "top": false, "right": false},
+      "grid": "horizontal_minor (very light)",
+      "series_count": 1,
+      "series": [
+        {"name": "MCQ count", "color": "#7080b0", "style": "solid fill"}
+      ],
+      "annotations": "value labels above each bar (853, 353, 154, 72, 39, 26, 50)"
+    },
+    "data": {
+      "categories": ["1", "2", "3", "4", "5", "6", "≥7"],
+      "values": [853, 353, 154, 72, 39, 26, 50]
+    },
+    "source": "Figure 3(d) 标注（数值直接打在柱顶）",
+    "confidence": "精确"
+  },
+  "figure3": {
+    "original_ref": "Figure 3(f) Input token length",
+    "chart_type": "histogram",
+    "description": "MedQA 与 RxEval 输入 token 长度分布对比：MedQA 集中在 200-300 tokens，RxEval 中位数约 3k tokens（多 13×）",
+    "structure": {
+      "subplots": 1,
+      "x_axis": {"meaning": "Input length (tokens)", "type": "continuous_log", "range": [100, 100000]},
+      "y_axis": {"meaning": "# Samples", "type": "continuous", "range": [0, 250]},
+      "background_fill": "white",
+      "spines": {"left": true, "bottom": true, "top": false, "right": false},
+      "grid": "horizontal_minor (very light)",
+      "series_count": 2,
+      "series": [
+        {"name": "MedQA",  "color": "#b090d0", "style": "filled bars (alpha~0.85)"},
+        {"name": "RxEval", "color": "#90b080", "style": "filled bars (alpha~0.85)"}
+      ],
+      "legend": {"location": "upper right", "frameon": true, "border": true}
+    },
+    "data": {
+      "source_file": "cache/fig3_hist.json",
+      "medqa_mode_log10": 2.39,
+      "medqa_mode_tokens": 245,
+      "medqa_peak_count": 255,
+      "rxeval_mode_log10": 3.51,
+      "rxeval_mode_tokens": 3236,
+      "rxeval_peak_count": 145,
+      "ratio_median": "13×"
+    },
+    "calibration": {
+      "method": "pixel_calibration",
+      "tool": "color region top detection on 6x render",
+      "x_decade_px": 216,
+      "y_50count_px": 111
+    },
+    "source": "Figure 3(f) 像素校准提取（每 bar log_x_center + count）",
+    "confidence": "数值误差 ±3 计数"
+  }
+}

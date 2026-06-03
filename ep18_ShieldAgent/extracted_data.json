@@ -1,0 +1,81 @@
+{
+  "paper": {
+    "title": "ShieldAgent: Shielding Agents via Verifiable Safety Policy Reasoning",
+    "venue": "ICML 2025",
+    "authors": "Chen, Kang, Li",
+    "summary": "本文提出 ShieldAgent，首个面向 LLM 智能体的护栏代理，通过从政策文本抽取可验证规则并构建动作级概率电路实现显式安全合规。创新之处在于以可验证安全策略推理（VSPR）替代纯文本过滤，结合混合记忆与工具库执行形式化验证。实验显示 ShieldAgent 在 ShieldAgent-Bench 上以 90.4% ACC + 87.5% ARR@R 超越最佳基线 11.3%，同时减少 64.7% API 调用与 58.2% 推理时间。"
+  },
+  "figure1": {
+    "original_ref": "Figure 3",
+    "chart_type": "bar",
+    "description": "Performance comparison of ShieldAgent with rule traverse and GuardAgent baselines on ST-WebAgentBench (per risk category)",
+    "structure": {
+      "subplots": "1x1 grouped bar",
+      "panel_bg": "white",
+      "grid": "horizontal light grey lines",
+      "x_categories": ["Consent", "Boundary", "Execution"],
+      "groups_per_category": 3,
+      "legend_loc": "top inside"
+    },
+    "data": {
+      "categories": ["Consent", "Boundary", "Execution"],
+      "methods": ["Traverse", "GuardAgent", "ShieldAgent"],
+      "values": {
+        "Traverse":    [84.3, 85.0, 80.5],
+        "GuardAgent":  [80.1, 89.0, 83.0],
+        "ShieldAgent": [91.3, 93.5, 88.3]
+      },
+      "y_label": "accuracy",
+      "y_range": [70, 100],
+      "y_ticks": [70, 80, 90, 100]
+    },
+    "source": "Pixel calibration on Figure 3 (Table 3 anchor: ShieldAgent ST-Web ACC=91.1)"
+  },
+  "figure2": {
+    "original_ref": "Figure 4",
+    "chart_type": "bar",
+    "description": "Number of rules during each iteration step for GitLab policy. Orange: Verifiability Refinement step; Blue: Redundancy Pruning step.",
+    "structure": {
+      "subplots": "1x1 grouped bar",
+      "panel_bg": "white",
+      "grid": "horizontal light grey lines",
+      "x_axis": "Iteration 0-9",
+      "groups_per_iter": 2,
+      "legend_loc": "top right inside"
+    },
+    "data": {
+      "iterations": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+      "verifiability_refinement": [600, 510, 405, 370, 308, 265, 213, 201, 201, 200],
+      "redundancy_pruning":       [510, 405, 370, 308, 265, 213, 200, 200, 198, 195],
+      "x_label": "Iteration",
+      "y_label": "# of Rules",
+      "y_range": [0, 600],
+      "y_ticks": [0, 100, 200, 300, 400, 500, 600]
+    },
+    "source": "Pixel calibration on Figure 4 (~±10 on counts)"
+  },
+  "figure3": {
+    "original_ref": "Figure 6",
+    "chart_type": "line",
+    "description": "Vagueness score (Avg/Min/Max) of rule set during each iteration step optimizing GitLab policy. Lower = more concrete rules.",
+    "structure": {
+      "subplots": "1x1 multi-line",
+      "panel_bg": "white",
+      "grid": "horizontal light grey lines",
+      "lines": 3,
+      "markers": ["o", "s", "^"],
+      "legend_loc": "middle right inside"
+    },
+    "data": {
+      "iterations": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+      "avg_vagueness": [0.622, 0.598, 0.582, 0.567, 0.553, 0.537, 0.527, 0.526, 0.522, 0.515],
+      "min_vagueness": [0.401, 0.357, 0.357, 0.358, 0.358, 0.353, 0.354, 0.347, 0.350, 0.350],
+      "max_vagueness": [0.906, 0.892, 0.864, 0.825, 0.825, 0.825, 0.798, 0.798, 0.798, 0.766],
+      "x_label": "Iteration",
+      "y_label": "Rule Vagueness",
+      "y_range": [0.3, 0.95],
+      "y_ticks": [0.4, 0.5, 0.6, 0.7, 0.8, 0.9]
+    },
+    "source": "Pixel calibration on Figure 6 (~±0.01 on vagueness)"
+  }
+}

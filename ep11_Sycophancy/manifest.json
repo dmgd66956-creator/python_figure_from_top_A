@@ -1,0 +1,48 @@
+{
+  "date": "2026-05-16",
+  "paper": {
+    "title": "Sycophancy is an Educational Safety Risk: Why LLM Tutors Need Sycophancy Benchmarks",
+    "venue": "arXiv 2026.05 (ICLR 2026 submission)",
+    "arxiv_id": "2605.14604",
+    "url": "https://arxiv.org/abs/2605.14604",
+    "pdf_path": "paper.pdf"
+  },
+  "figures": [
+    {
+      "index": 1,
+      "original_ref": "Figure 3",
+      "chart_type": "grouped_bar",
+      "description": "Sycophancy rates by pressure mode and domain",
+      "files": {
+        "original": "1.1_原图.png",
+        "reproduced": "1.2_生成图.png",
+        "comparison": "1.3_对比图.png"
+      },
+      "data_source": "Figure 3 (page 7) reading + Section 7"
+    },
+    {
+      "index": 2,
+      "original_ref": "Figure 5",
+      "chart_type": "heatmap",
+      "description": "Domain × pressure fragility heatmaps (GPT-5.2 / Claude 4.5)",
+      "files": {
+        "original": "2.1_原图.png",
+        "reproduced": "2.2_生成图.png",
+        "comparison": "2.3_对比图.png"
+      },
+      "data_source": "Figure 5 (page 8) annotation"
+    },
+    {
+      "index": 3,
+      "original_ref": "Figure 7",
+      "chart_type": "bar",
+      "description": "Highest-sycophancy topics by domain (top 3 per domain)",
+      "files": {
+        "original": "3.1_原图.png",
+        "reproduced": "3.2_生成图.png",
+        "comparison": "3.3_对比图.png"
+      },
+      "data_source": "Figure 7 (page 18) annotation"
+    }
+  ]
+}

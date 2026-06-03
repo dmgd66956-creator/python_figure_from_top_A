@@ -1,0 +1,258 @@
+{
+  "paper": {
+    "title": "Large Language Monkeys: Scaling Inference Compute with Repeated Sampling",
+    "venue": "NeurIPS 2024",
+    "authors": "Bradley Brown, Jordan Juravsky, Ryan Ehrlich, Ronald Clark, Quoc V. Le, Christopher Ré, Azalia Mirhoseini",
+    "summary": "本文研究通过重复采样来扩展LLM推理时计算量，发现coverage随采样数量按幂律增长。创新之处在于首次系统性地证明了重复采样的scaling law（c≈exp(ak^b)），并展示弱模型通过大量采样可超越强模型的单次表现。实验表明在SWE-bench Lite上，开源模型通过250次采样将解决率从15.9%提升至56%，超过单次SOTA的43%。"
+  },
+
+  "figure1": {
+    "original_ref": "Figure 2",
+    "chart_type": "multi_line",
+    "description": "Coverage (pass@k) vs Number of Samples across 5 tasks, showing scaling behavior",
+    "structure": {"panels": 5, "layout": "1_large_left_plus_2x2_right", "x_scale": "log", "lines_per_panel": "1-2 + reference"},
+
+    "visual_spec": {
+      "L0_canvas": {
+        "figsize": [12, 4.5],
+        "background": "white",
+        "subplots": "1 large left + 2×2 grid right",
+        "layout_description": "Left panel (SWE-bench) takes ~45% width, right 4 panels in 2×2 grid"
+      },
+      "L1_frame": {
+        "spines": {"left": true, "bottom": true, "top": true, "right": true},
+        "spine_width": 0.6,
+        "tick_direction": "out",
+        "x_scale": "log",
+        "y_range": [0, 1.0],
+        "x_range_left": [1, 250],
+        "x_range_right": [1, 10000]
+      },
+      "L2_grid": {
+        "grid": false
+      },
+      "L3_colors": {
+        "Llama-3-8B-Instruct": "#1f77b4",
+        "Llama-3-70B-Instruct": "#009070",
+        "DeepSeek-Coder-V2-Instruct": "#1f77b4",
+        "GPT-4o_ref": "#d62728",
+        "SOTA_ref": "#2c2c2c"
+      },
+      "L4_data": {
+        "chart_type": "line",
+        "line_width": 2.0,
+        "marker": "none"
+      },
+      "L5_overlay": {
+        "reference_lines": [
+          {"type": "horizontal_dashed", "color": "#d62728", "label": "Single-Attempt GPT-4o", "style": "--"},
+          {"type": "horizontal_dashed", "color": "#2c2c2c", "label": "Single-Attempt SOTA", "style": "--"}
+        ]
+      },
+      "L6_annotation": {
+        "percentage_labels": ["56%", "43%", "24.67%"],
+        "position": "right of line endpoints"
+      },
+      "L7_text": {
+        "fs_axis_label": 10,
+        "fs_tick_label": 8,
+        "fs_title": 11,
+        "fs_legend": 8,
+        "panel_titles": ["SWE-bench Lite", "MiniF2F-MATH (Formal Proofs)", "CodeContests", "MATH (Oracle Verifier)", "GSM8K (Oracle Verifier)"]
+      }
+    },
+
+    "data": {
+      "note": "Coverage follows power law c = exp(a*k^b). Data generated from formula with paper parameters.",
+      "left_panel_SWE_bench": {
+        "x_range": [1, 250],
+        "DeepSeek_Coder_V2": {"pass_at_1": 0.159, "pass_at_250": 0.56, "a": -1.84, "b": -0.30},
+        "SOTA_line": 0.43,
+        "GPT4o_line": 0.2467
+      },
+      "right_panels": {
+        "MiniF2F_MATH": {
+          "x_range": [1, 10000],
+          "Llama_8B": {"a": -1.33, "b": -0.08},
+          "Llama_70B": {"pass_at_1": 0.25, "saturates_around": 0.48},
+          "GPT4o_ref": 0.25
+        },
+        "CodeContests": {
+          "x_range": [1, 10000],
+          "Llama_8B": {"a": -3.88, "b": -0.11},
+          "Llama_70B": {"a": -2.52, "b": -0.11},
+          "GPT4o_ref": 0.20
+        },
+        "MATH": {
+          "x_range": [1, 10000],
+          "Llama_8B": {"a": -1.33, "b": -0.43, "pass_at_1": 0.22, "pass_at_10000": 0.9844},
+          "Llama_70B": {"a": -0.75, "b": -0.46},
+          "GPT4o_ref": 0.70
+        },
+        "GSM8K": {
+          "x_range": [1, 10000],
+          "Llama_8B": {"pass_at_1": 0.75, "pass_at_10000": 0.99},
+          "Llama_70B": {"pass_at_1": 0.90, "pass_at_10000": 1.0},
+          "GPT4o_ref": 0.95
+        }
+      }
+    },
+    "source": "Figure 2 + Section 2.1 + power law parameters from Figure 5",
+    "confidence": "Power law formula exact; reference line values from figure annotations"
+  },
+
+  "figure2": {
+    "original_ref": "Figure 5",
+    "chart_type": "multi_line",
+    "description": "Power law fits (c = exp(ak^b)) for 8 model-task combinations, 2×4 grid",
+    "structure": {"panels": 8, "layout": "2x4_grid", "x_scale": "log", "lines_per_panel": 2},
+
+    "visual_spec": {
+      "L0_canvas": {
+        "figsize": [12, 6],
+        "background": "white",
+        "subplots": "2×4 grid",
+        "wspace": 0.3,
+        "hspace": 0.55
+      },
+      "L1_frame": {
+        "spines": {"left": true, "bottom": true, "top": true, "right": true},
+        "spine_width": 0.6,
+        "tick_direction": "out",
+        "x_scale": "log",
+        "x_range": [1, 10000],
+        "y_range": [0, 1.0],
+        "x_ticks": [1, 10, 100, 1000, 10000],
+        "y_ticks": [0.0, 0.2, 0.4, 0.6, 0.8, 1.0]
+      },
+      "L2_grid": {
+        "grid": false
+      },
+      "L3_colors": {
+        "Coverage": "#1f77b4",
+        "Power_Law_Fit": "#ff7f0e"
+      },
+      "L4_data": {
+        "chart_type": "line",
+        "line_width": 1.5,
+        "marker": "none"
+      },
+      "L5_overlay": {
+        "type": "none"
+      },
+      "L6_annotation": {
+        "panel_subtitles_with_params": true,
+        "format": "(a=X, b=Y)\nError: M ± S"
+      },
+      "L7_text": {
+        "fs_axis_label": 9,
+        "fs_tick_label": 7,
+        "fs_title": 9,
+        "fs_legend": 7
+      }
+    },
+
+    "data": {
+      "formula": "c = exp(a * k^b)",
+      "panels": [
+        {"model": "Llama-3-8B-Instruct", "task": "MATH (Oracle Verifier)", "a": -1.33, "b": -0.43, "error_mean": 0.003, "error_std": 0.0027},
+        {"model": "Llama-3-70B-Instruct", "task": "MATH (Oracle Verifier)", "a": -0.75, "b": -0.46, "error_mean": 0.0056, "error_std": 0.0036},
+        {"model": "Llama-3-8B-Instruct", "task": "CodeContests", "a": -3.88, "b": -0.11, "error_mean": 0.002, "error_std": 0.0015},
+        {"model": "Llama-3-70B-Instruct", "task": "CodeContests", "a": -2.52, "b": -0.11, "error_mean": 0.0056, "error_std": 0.0027},
+        {"model": "Pythia-70M", "task": "MATH (Oracle Verifier)", "a": -7.59, "b": -0.18, "error_mean": 0.0052, "error_std": 0.0071},
+        {"model": "Pythia-12B", "task": "MATH (Oracle Verifier)", "a": -3.92, "b": -0.35, "error_mean": 0.0189, "error_std": 0.0118},
+        {"model": "Gemma-2B", "task": "MATH (Oracle Verifier)", "a": -2.45, "b": -0.38, "error_mean": 0.0218, "error_std": 0.014},
+        {"model": "Llama-3-8B-Instruct", "task": "MiniF2F-MATH", "a": -1.33, "b": -0.08, "error_mean": 0.0297, "error_std": 0.0157}
+      ]
+    },
+    "source": "Figure 5 annotations (a, b, Error values directly labeled in figure)",
+    "confidence": "精确 — 参数直接标注在图中"
+  },
+
+  "figure3": {
+    "original_ref": "Figure 8",
+    "chart_type": "bar",
+    "description": "Fraction of correct samples per problem (sorted), colored by majority voting correctness",
+    "structure": {"panels": 4, "layout": "1x4_grid", "bars_per_panel": 128, "color_encoding": "majority_vote_correctness"},
+
+    "visual_spec": {
+      "L0_canvas": {
+        "figsize": [12, 3.2],
+        "background": "white",
+        "subplots": "1×4 grid",
+        "wspace": 0.25
+      },
+      "L1_frame": {
+        "spines": {"left": true, "bottom": true, "top": true, "right": true},
+        "spine_width": 0.6,
+        "tick_direction": "out",
+        "x_axis": "Problem Index (Sorted by Correct Fraction)",
+        "y_axis": "Correct Sample Percentage",
+        "y_range": [0, 1.0],
+        "y_ticks_format": "percentage (0%, 20%, ..., 100%)"
+      },
+      "L2_grid": {
+        "grid": false
+      },
+      "L3_colors": {
+        "correct_majority_vote": "#2ca02c",
+        "incorrect_majority_vote": "#c4162a"
+      },
+      "L4_data": {
+        "chart_type": "bar",
+        "bar_width": 1.0,
+        "edge": "none",
+        "n_problems_GSM8K": 128,
+        "n_problems_MATH": 128,
+        "n_samples_per_problem": 10000
+      },
+      "L5_overlay": {
+        "type": "none"
+      },
+      "L6_annotation": {
+        "type": "none"
+      },
+      "L7_text": {
+        "fs_axis_label": 9,
+        "fs_tick_label": 7,
+        "fs_title": 10,
+        "fs_legend": 8,
+        "panel_titles": [
+          "Llama-3-8B-Instruct\nGSM8K",
+          "Llama-3-8B-Instruct\nMATH",
+          "Llama-3-70B-Instruct\nGSM8K",
+          "Llama-3-70B-Instruct\nMATH"
+        ]
+      }
+    },
+
+    "data": {
+      "note": "Each bar = fraction of 10000 samples that are correct for one problem. Sorted ascending. Green if majority vote correct, red otherwise. Data simulated from known pass@1 and distribution shape.",
+      "generation_method": "Use beta distribution to simulate per-problem correct fractions, sorted ascending. Majority vote threshold = 0.5 (green if fraction > 0.5, else red).",
+      "panels": [
+        {
+          "model": "Llama-3-8B-Instruct", "task": "GSM8K",
+          "n_problems": 128, "pass_at_1": 0.75,
+          "description": "Most problems have high correct fraction; a few near 0; smooth S-curve shape"
+        },
+        {
+          "model": "Llama-3-8B-Instruct", "task": "MATH",
+          "n_problems": 128, "pass_at_1": 0.22,
+          "description": "Many problems near 0; gradual increase; some red bars scattered in middle"
+        },
+        {
+          "model": "Llama-3-70B-Instruct", "task": "GSM8K",
+          "n_problems": 128, "pass_at_1": 0.90,
+          "description": "Almost all problems have high correct fraction; very few red bars"
+        },
+        {
+          "model": "Llama-3-70B-Instruct", "task": "MATH",
+          "n_problems": 128, "pass_at_1": 0.40,
+          "description": "More problems solved than 8B; smoother curve; some red bars in low-fraction region"
+        }
+      ]
+    },
+    "source": "Figure 8 + Section 2.1 (128 problems per task, 10000 samples)",
+    "confidence": "Distribution shape from visual inspection; exact per-problem values simulated"
+  }
+}

@@ -1,0 +1,94 @@
+{
+  "paper": {
+    "title": "Self-Discover: Large Language Models Self-Compose Reasoning Structures",
+    "venue": "ICML 2024",
+    "authors": "Pei Zhou, Jay Pujara, Xiang Ren, Xinyun Chen, Heng-Tze Cheng, Quoc V. Le, Ed H. Chi, Denny Zhou, Swaroop Mishra, Huaixiu Steven Zheng",
+    "arxiv_id": "2402.03620",
+    "summary": "本文提出 SELF-DISCOVER 框架，让 LLM 在原子推理模块库中通过 SELECT/ADAPT/IMPLEMENT 三步自主组合出任务专属的结构化推理流程，再用该 JSON 结构指导作答。创新点是把 CoT/ToT 等人工指定的策略升级为模型自发现的元推理结构，仅需 3 次任务级元提示。在 BBH/T4D/MATH 上 GPT-4+Self-Discover 相对 CoT 提升 6%/33%/2%。"
+  },
+  "figure1": {
+    "original_ref": "Figure 4",
+    "chart_type": "grouped_bar",
+    "description": "BBH 4 类问题上 SELF-DISCOVER 相对 Direct/CoT 的平均准确率提升。",
+    "structure": {
+      "subplots": "1x1 grouped bar",
+      "panel_bg": "white",
+      "grid": "horizontal light grey lines",
+      "x_categories": ["Multilingual", "Algorithmic", "NLU", "World Knowledge"],
+      "groups_per_category": 2,
+      "value_labels": "above bars",
+      "legend_loc": "upper left inside"
+    },
+    "data": {
+      "categories": ["Multilingual", "Algorithmic", "NLU", "World Knowledge"],
+      "methods": ["Self-Discover Over Direct", "Self-Discover Over CoT"],
+      "values": {
+        "Self-Discover Over Direct": [4.0, 14.2, 14.3, 19.8],
+        "Self-Discover Over CoT":    [12.0, 5.2, 8.0, 19.7]
+      },
+      "x_label": "Problem Categories",
+      "y_label": "Avg. Accuracy Delta (%)",
+      "y_range": [0, 25],
+      "y_ticks": [0, 5, 10, 15, 20, 25]
+    },
+    "source": "Direct readout from Figure 4 — labels printed on bars: 4.0/14.2/14.3/19.8 (vs Direct), 12.0/5.2/8.0/19.7 (vs CoT)."
+  },
+  "figure2": {
+    "original_ref": "Figure 5",
+    "chart_type": "scatter",
+    "description": "GPT-4 在 BBH-Movie Recommendation 与 BBH-Geometric Shapes 上的 Accuracy vs # Inference Calls — 7 种方法散点对比。",
+    "structure": {
+      "subplots": "1x2 scatter",
+      "panel_bg": "white",
+      "grid": "both grey grid lines",
+      "markers": "★ ● ■ ▲ ♦ × ⬟",
+      "x_log_like": false,
+      "legend_loc": "right outside"
+    },
+    "data": {
+      "methods": ["Self-Discover", "Direct", "CoT", "CoT+Self-Consistency", "Plan-and-Solve", "Majority voting each RM", "Best of each RM*"],
+      "markers":  ["*", "o", "s", "^", "D", "x", "p"],
+      "x_calls":  [1, 1, 1, 10, 1, 40, 40],
+      "movie_y":  [86, 65, 73, 77, 74, 72, 85],
+      "geometry_y": [61, 32, 43, 52, 45, 42, 60],
+      "x_label": "# of Inference Calls Per Instance",
+      "y_label": "Average Accuracy",
+      "movie_x_range": [-2, 45],
+      "movie_y_range": [62, 88],
+      "movie_y_ticks": [65, 70, 75, 80, 85],
+      "geometry_x_range": [-2, 45],
+      "geometry_y_range": [29, 64],
+      "geometry_y_ticks": [35, 40, 45, 50, 55, 60]
+    },
+    "source": "Direct readout from Figure 5 (clear 5-unit grid). Inference call counts from paper text: Self-Discover/Direct/CoT/Plan-and-Solve = 1, CoT+Self-Consistency = 10, Majority/Best of each RM = 40."
+  },
+  "figure3": {
+    "original_ref": "Figure 8",
+    "chart_type": "grouped_bar",
+    "description": "在 4 个 BBH 任务上 SELF-DISCOVER 三个动作（SELECT/ADAPT/IMPLEMENT）的消融研究。",
+    "structure": {
+      "subplots": "1x1 grouped bar (4 series)",
+      "panel_bg": "white",
+      "grid": "horizontal light grey lines",
+      "x_categories": ["Snarks", "Movie", "T4D", "Geometry"],
+      "groups_per_category": 4,
+      "value_labels": "above bars",
+      "legend_loc": "upper right inside"
+    },
+    "data": {
+      "categories": ["Snarks", "Movie", "T4D", "Geometry"],
+      "methods": ["CoT", "Ours-S", "Ours-SA", "Ours-SAI"],
+      "values": {
+        "CoT":      [89, 73, 50, 43],
+        "Ours-S":   [90, 73, 65, 50],
+        "Ours-SA":  [93, 79, 80, 45],
+        "Ours-SAI": [94, 86, 85, 61]
+      },
+      "x_label": "Tasks",
+      "y_label": "Accuracy",
+      "y_range": [30, 100],
+      "y_ticks": [30, 40, 50, 60, 70, 80, 90, 100]
+    },
+    "source": "Direct readout from Figure 8 — labels printed on bars across 4 tasks × 4 ablation methods (16 values)."
+  }
+}

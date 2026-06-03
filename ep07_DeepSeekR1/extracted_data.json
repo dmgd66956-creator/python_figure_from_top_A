@@ -1,0 +1,91 @@
+{
+  "paper": {
+    "title": "DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via Reinforcement Learning",
+    "venue": "ICML 2025",
+    "authors": "DeepSeek-AI (Daya Guo, Dejian Yang, Haowei Zhang, Junxiao Song, Peiyi Wang, et al.)",
+    "summary": "本文提出DeepSeek-R1，通过纯强化学习（GRPO算法）激励LLM自主发展推理能力，无需人类标注的推理轨迹。创新性地发现模型在RL训练中自然涌现出自我验证、反思和动态策略调整等高级推理行为（'aha moment'）。实验表明DeepSeek-R1在AIME 2024数学竞赛上达79.8% Pass@1超越人类平均水平，Codeforces编程竞赛排名超过96.3%的人类选手。"
+  },
+
+  "figure1": {
+    "original_ref": "Figure 10",
+    "chart_type": "grouped_bar",
+    "description": "DeepSeek-R1 vs DeepSeek-R1-Zero vs Human Expert在AIME 2024、Codeforces、GPQA Diamond三个基准上的表现对比",
+    "visual_spec": {
+      "L0_canvas": {"width": 8, "height": 5.5, "bg_color": "#FFFFFF", "dpi": 150},
+      "L1_frame": {"axes_visible": [true, true, true, true], "spine_width": 0.8},
+      "L2_grid": {"grid": true, "grid_axis": "y", "grid_style": "solid", "grid_alpha": 0.3, "grid_color": "#CCCCCC"},
+      "L3_colors": {
+        "DeepSeek-R1": "#4472C4",
+        "DeepSeek-R1-Zero": "#70AD47",
+        "Human Expert": "#A5A5A5"
+      },
+      "L4_data": "grouped vertical bars with value annotations",
+      "L5_overlay": {"hatch_r1": "///"},
+      "L6_annotation": {"value_labels": true, "legend_position": "upper center"},
+      "L7_text": {"xlabel": null, "ylabel": "Accuracy / Percentile (%)", "fontsize_tick": 10, "fontsize_label": 11, "fontsize_annotation": 10}
+    },
+    "data": {
+      "benchmarks": ["AIME 2024\n(Pass@1)", "Codeforces\n(Percentile)", "GPQA Diamond\n(Pass@1)"],
+      "DeepSeek-R1": [79.8, 96.3, 71.5],
+      "DeepSeek-R1-Zero": [77.9, 80.4, 75.8],
+      "Human Expert": [37.8, 50.0, 81.2]
+    },
+    "source": "Figure 10 (values directly annotated on bars)",
+    "confidence": "Exact values from annotations"
+  },
+
+  "figure2": {
+    "original_ref": "Figure 4",
+    "chart_type": "多系列折线图",
+    "description": "PPO与GRPO在MATH任务上的性能对比，展示不同λ值对PPO的影响",
+    "visual_spec": {
+      "L0_canvas": {"width": 6.5, "height": 5, "bg_color": "#FFFFFF", "dpi": 150},
+      "L1_frame": {"axes_visible": [true, true, true, true], "spine_width": 0.8},
+      "L2_grid": {"grid": false},
+      "L3_colors": {
+        "PPO_095": "#1F77B4",
+        "PPO_10": "#1F77B4",
+        "GRPO": "#2CA02C"
+      },
+      "L4_data": "lines with markers",
+      "L5_overlay": null,
+      "L6_annotation": {"legend_position": "lower right"},
+      "L7_text": {"xlabel": "Steps", "ylabel": "Accuracy", "fontsize_tick": 10, "fontsize_label": 11}
+    },
+    "data": {
+      "steps": [200, 400, 600, 800, 1000, 1200, 1400, 1600, 1800, 2000, 2200, 2500],
+      "PPO_lambda_095": [0.435, 0.445, 0.470, 0.478, 0.485, 0.490, 0.492, 0.495, 0.498, 0.502, 0.498, 0.503],
+      "PPO_lambda_10": [0.440, 0.462, 0.490, 0.505, 0.515, 0.525, 0.530, 0.535, 0.532, 0.538, 0.540, 0.535],
+      "GRPO": [0.500, 0.510, 0.520, 0.525, 0.530, 0.535, 0.545, 0.528, 0.540, 0.542, 0.540, 0.555]
+    },
+    "source": "Figure 4 (pixel-calibrated, y-axis 0.42-0.56, x-axis 0-2500)",
+    "confidence": "Values ±0.005"
+  },
+
+  "figure3": {
+    "original_ref": "Figure 6",
+    "chart_type": "dual_axis_line",
+    "description": "Reward Hacking现象：奖励分数持续上升但CodeForces实际性能先升后降",
+    "visual_spec": {
+      "L0_canvas": {"width": 7, "height": 5, "bg_color": "#FFFFFF", "dpi": 150},
+      "L1_frame": {"axes_visible": [true, true, true, true], "spine_width": 0.8},
+      "L2_grid": {"grid": true, "grid_style": "dashed", "grid_alpha": 0.3},
+      "L3_colors": {
+        "reward": "#0000FF",
+        "performance": "#FF0000"
+      },
+      "L4_data": "dual y-axis lines with markers, reward has noisy background",
+      "L5_overlay": {"reward_noise_band": true},
+      "L6_annotation": {"legend_position": "upper left"},
+      "L7_text": {"xlabel": "Steps", "ylabel_left": "Reward Score", "ylabel_right": "Test Pass@1", "fontsize_tick": 9, "fontsize_label": 11}
+    },
+    "data": {
+      "steps_reward": [0, 20, 40, 60, 80, 100, 120, 140, 160, 180, 200, 220, 240, 260, 280, 300, 320, 340, 360, 380, 400, 420, 440, 460, 480, 500, 520, 540, 560, 580, 600, 620, 640, 660, 680, 700],
+      "reward_mean": [3.20, 3.45, 3.55, 3.70, 3.80, 3.85, 3.78, 3.90, 3.95, 4.05, 4.10, 4.15, 4.20, 4.25, 4.28, 4.30, 4.22, 4.35, 4.30, 4.32, 4.38, 4.40, 4.42, 4.45, 4.48, 4.50, 4.45, 4.48, 4.52, 4.50, 4.55, 4.48, 4.52, 4.55, 4.58, 4.60],
+      "steps_performance": [0, 50, 100, 150, 200, 250, 300, 350, 400, 450, 500, 550, 600, 650, 700],
+      "performance": [0.310, 0.335, 0.345, 0.348, 0.350, 0.345, 0.340, 0.335, 0.338, 0.335, 0.332, 0.330, 0.300, 0.292, 0.285]
+    },
+    "source": "Figure 6 (pixel-calibrated, left y-axis 3.0-5.0, right y-axis 0.28-0.36)",
+    "confidence": "Reward ±0.1, Performance ±0.005"
+  }
+}

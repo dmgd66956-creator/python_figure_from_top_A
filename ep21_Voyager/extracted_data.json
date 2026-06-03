@@ -1,0 +1,150 @@
+{
+  "paper": {
+    "title": "Voyager: An Open-Ended Embodied Agent with Large Language Models",
+    "venue": "NeurIPS 2024 (Wang et al., NVIDIA / Caltech / UT Austin)",
+    "authors": "Guanzhi Wang, Yuqi Xie, Yunfan Jiang, Ajay Mandlekar, Chaowei Xiao, Yuke Zhu, Linxi Fan, Anima Anandkumar",
+    "summary": "本文提出 Voyager —— 首个由 LLM 驱动的终身学习智能体，在 Minecraft 中通过自动课程、技能库与可执行代码迭代式自我提升。创新点是用 GPT-4 将环境反馈+自我验证反馈循环编码为可复用 Python 技能，免微调地积累长期经验。结果：Voyager 收集独特物品比 SOTA 多 3.3 倍，关键里程碑速度快 15.3 倍，并能零样本迁移到全新 Minecraft 任务。"
+  },
+
+  "figure1": {
+    "original_ref": "Figure 1",
+    "chart_type": "multi_line",
+    "description": "Voyager 与三个 baseline 在 Minecraft 中累积发现物品数随提示迭代变化（含置信带）",
+
+    "structure": {
+      "subplots": 1,
+      "layout": "单图",
+      "x_axis": {"meaning": "Prompting Iterations in Code Generation", "range": [0, 160], "ticks": [0, 25, 50, 75, 100, 125, 150]},
+      "y_axis": {"meaning": "Number of Distinct Items", "range": [0, 65], "ticks": [0, 10, 20, 30, 40, 50, 60]},
+      "series": [
+        {"name": "Voyager (Ours)", "color": "#ee8a3e"},
+        {"name": "ReAct", "color": "#62b6ec"},
+        {"name": "Reflexion", "color": "#9968b4"},
+        {"name": "AutoGPT", "color": "#3eb35a"}
+      ]
+    },
+
+    "data": {
+      "x": [0, 5, 10, 15, 20, 25, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150, 160],
+      "series": {
+        "Voyager (Ours)": [0,   8,   13,  18,  21,  24,  27,  32,  37,  41,  44,  47,  50,  54,  57,  59,  61,  62,  63,  63],
+        "ReAct":          [0,   3,   6,   8,   9,   11,  13,  16,  19,  22,  25,  29,  32,  35,  37,  37,  37,  38,  38,  38],
+        "Reflexion":      [0,   2,   4,   6,   8,   10,  11,  13,  14,  15,  16,  17,  17,  17,  17,  17,  17,  17,  17,  17],
+        "AutoGPT":        [0,   1,   2,   2,   3,   3,   4,   4,   4,   4,   4,   4,   4,   4,   4,   5,   5,   5,   5,   5]
+      },
+      "milestones": [
+        {"label": "Wooden Tool", "x": 5,   "y": 3,   "method": "Voyager"},
+        {"label": "Stone Tool",  "x": 10,  "y": 6,   "method": "Voyager"},
+        {"label": "Iron Tool",   "x": 18,  "y": 12,  "method": "Voyager"},
+        {"label": "Diamond Tool","x": 130, "y": 60,  "method": "Voyager"},
+        {"label": "Wooden Tool", "x": 65,  "y": 14,  "method": "ReAct"},
+        {"label": "Stone Tool",  "x": 90,  "y": 22,  "method": "ReAct"},
+        {"label": "Iron Tool",   "x": 140, "y": 36,  "method": "ReAct"}
+      ]
+    },
+
+    "annotations": [
+      {"text": "Minecraft Tech Tree", "x_norm": 0.18, "y": 60, "color": "#222222"}
+    ],
+
+    "source": "Figure 1 主图像素读取 (±2 items)",
+    "confidence": "±5%"
+  },
+
+  "figure2": {
+    "original_ref": "Figure 8",
+    "chart_type": "multi_line",
+    "description": "Voyager vs AutoGPT 在两个未见任务（craft golden sword / collect lava bucket）上的零样本进度阶梯曲线 1×2",
+
+    "structure": {
+      "subplots": 2,
+      "layout": "1×2",
+      "panels": [
+        {"name": "Craft a Golden Sword",
+         "y_categories": ["wood log", "crafting table", "wooden pickaxe", "stone pickaxe", "furnace", "iron ingot", "iron pickaxe", "raw gold", "gold ingot", "golden sword"],
+         "y_pos": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]},
+        {"name": "Collect a Lava Bucket",
+         "y_categories": ["wood log", "crafting table", "wooden pickaxe", "stone pickaxe", "furnace", "raw iron", "iron ingot", "bucket", "lava source", "lava bucket"],
+         "y_pos": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]}
+      ],
+      "x_axis": {"meaning": "Prompting Iterations in Code Generation", "range": [0, 50], "ticks": [0, 10, 20, 30, 40, 50]},
+      "series": [
+        {"name": "Voyager (Ours)", "color": "#ee8a3e"},
+        {"name": "Voyager w/o Skill Library", "color": "#f1c732"},
+        {"name": "AutoGPT", "color": "#c9a4d6"},
+        {"name": "AutoGPT w/ Our Skill Library", "color": "#6a2d8c"}
+      ]
+    },
+
+    "data": {
+      "Craft a Golden Sword": {
+        "Voyager (Ours)":              [[0,0],[1,1],[2,3],[3,5],[4,6],[7,7],[10,8],[11,9],[50,9]],
+        "Voyager w/o Skill Library":   [[0,0],[2,1],[4,3],[7,5],[10,6],[12,7],[16,8],[20,9],[50,9]],
+        "AutoGPT":                     [[0,0],[3,1],[50,1]],
+        "AutoGPT w/ Our Skill Library":[[0,0],[2,1],[5,2],[7,3],[10,4],[14,5],[18,6],[22,7],[27,8],[30,9],[50,9]]
+      },
+      "Collect a Lava Bucket": {
+        "Voyager (Ours)":              [[0,0],[1,1],[3,3],[4,4],[6,5],[8,6],[10,7],[14,8],[16,9],[50,9]],
+        "Voyager w/o Skill Library":   [[0,0],[2,1],[5,3],[8,4],[11,5],[14,6],[16,7],[20,8],[22,8],[50,8]],
+        "AutoGPT":                     [[0,0],[2,1],[3,2],[50,2]],
+        "AutoGPT w/ Our Skill Library":[[0,0],[2,1],[4,2],[6,3],[8,4],[12,5],[16,6],[20,7],[24,8],[50,8]]
+      }
+    },
+
+    "source": "Figure 8 像素读取 (±1 iteration, ±0.5 step)",
+    "confidence": "±15%"
+  },
+
+  "figure3": {
+    "original_ref": "Figure 9",
+    "chart_type": "multi_line",
+    "description": "Ablation 1×2：左 = 自动课程/技能库/GPT-4 vs 替代版本；右 = 反馈类型消融",
+
+    "structure": {
+      "subplots": 2,
+      "layout": "1×2",
+      "panels": [
+        {"name": "Automatic Curriculum & Skill Library",
+         "y_label": "Number of Distinct Items", "y_range": [0, 65], "y_ticks": [0, 10, 20, 30, 40, 50, 60]},
+        {"name": "Iterative Prompting Feedback",
+         "y_label": "Number of Distinct Items", "y_range": [0, 65], "y_ticks": [0, 10, 20, 30, 40, 50, 60]}
+      ],
+      "x_axis": {"meaning": "Prompting Iterations in Code Generation", "range": [0, 160], "ticks": [0, 25, 50, 75, 100, 125, 150]},
+      "panels_series": {
+        "Automatic Curriculum & Skill Library": [
+          {"name": "Ours", "color": "#ee8a3e", "linestyle": "solid"},
+          {"name": "w/o Skill Library", "color": "#62b6ec", "linestyle": "solid"},
+          {"name": "GPT-3.5", "color": "#3eb35a", "linestyle": "solid"},
+          {"name": "Manual Curriculum", "color": "#9968b4", "linestyle": "dashed"},
+          {"name": "Random Curriculum", "color": "#b53958", "linestyle": "solid"}
+        ],
+        "Iterative Prompting Feedback": [
+          {"name": "Ours", "color": "#ee8a3e", "linestyle": "solid"},
+          {"name": "w/o Environment Feedback", "color": "#3eb35a", "linestyle": "solid"},
+          {"name": "w/o Execution Error", "color": "#b53958", "linestyle": "solid"},
+          {"name": "w/o Self-Verification", "color": "#62b6ec", "linestyle": "solid"}
+        ]
+      }
+    },
+
+    "data": {
+      "x": [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150, 160],
+      "Automatic Curriculum & Skill Library": {
+        "Ours":              [0, 12, 19, 25, 30, 35, 39, 43, 47, 50, 53, 56, 58, 60, 61, 62, 63],
+        "w/o Skill Library": [0, 9,  15, 19, 23, 26, 29, 31, 33, 35, 36, 36, 36, 37, 37, 37, 37],
+        "GPT-3.5":           [0, 4,  6,  7,  8,  9,  9,  10, 10, 10, 10, 10, 11, 11, 11, 11, 11],
+        "Manual Curriculum": [0, 6,  10, 13, 15, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17],
+        "Random Curriculum": [0, 1,  2,  3,  3,  4,  4,  4,  4,  4,  5,  5,  5,  5,  5,  5,  5]
+      },
+      "Iterative Prompting Feedback": {
+        "Ours":                       [0, 12, 19, 25, 30, 35, 39, 43, 47, 50, 53, 56, 58, 60, 61, 62, 63],
+        "w/o Environment Feedback":   [0, 8,  13, 17, 19, 21, 22, 23, 24, 24, 25, 25, 25, 25, 25, 25, 25],
+        "w/o Execution Error":        [0, 9,  14, 18, 21, 23, 24, 25, 26, 26, 26, 27, 27, 27, 27, 27, 27],
+        "w/o Self-Verification":      [0, 6,  10, 12, 14, 14, 15, 15, 15, 16, 16, 16, 16, 16, 16, 16, 16]
+      }
+    },
+
+    "source": "Figure 9 主曲线像素读取 (±2 items)",
+    "confidence": "±10%"
+  }
+}

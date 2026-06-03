@@ -1,0 +1,45 @@
+{
+  "project": "跟着顶会学绘图",
+  "episode": 8,
+  "date": "2026-05-14",
+  "paper": {
+    "title": "MixEval: Deriving Wisdom of the Crowd from LLM Benchmark Mixtures",
+    "venue": "NeurIPS 2024",
+    "short_name": "MixEval"
+  },
+  "figures": [
+    {
+      "index": 1,
+      "original_ref": "Figure 6",
+      "chart_type": "scatter_regression",
+      "chart_type_zh": "散点回归图",
+      "files": {
+        "original": "1.1_原图.png",
+        "generated": "1.2_生成图.png",
+        "comparison": "1.3_对比图.png"
+      }
+    },
+    {
+      "index": 2,
+      "original_ref": "Figure 8",
+      "chart_type": "grouped_bar_reflines",
+      "chart_type_zh": "参考线柱形图",
+      "files": {
+        "original": "2.1_原图.png",
+        "generated": "2.2_生成图.png",
+        "comparison": "2.3_对比图.png"
+      }
+    },
+    {
+      "index": 3,
+      "original_ref": "Figure 9",
+      "chart_type": "annotated_heatmap",
+      "chart_type_zh": "标注热力图",
+      "files": {
+        "original": "3.1_原图.png",
+        "generated": "3.2_生成图.png",
+        "comparison": "3.3_对比图.png"
+      }
+    }
+  ]
+}

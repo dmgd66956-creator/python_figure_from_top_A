@@ -1,0 +1,50 @@
+{
+  "date": "2026-05-20",
+  "paper": {
+    "title": "Large Language Monkeys: Scaling Inference Compute with Repeated Sampling",
+    "venue": "NeurIPS 2024",
+    "authors": "Bradley Brown, Jordan Juravsky, Ryan Ehrlich, Ronald Clark, Quoc V. Le, Christopher Ré, Azalia Mirhoseini",
+    "pdf_path": "paper.pdf"
+  },
+  "figures": [
+    {
+      "index": 1,
+      "original_ref": "Figure 2",
+      "chart_type": "multi_panel_line",
+      "description": "Coverage (pass@k) vs Number of Samples across 5 tasks (SWE-bench + 2×2 grid)",
+      "files": {
+        "original": "1.1_原图.png",
+        "reproduced": "1.2_生成图.png",
+        "comparison": "1.3_对比图.png"
+      },
+      "data_source": "Power law formula c=exp(ak^b) with paper parameters + reference line values from annotations",
+      "quality_notes": "1 large left + 2×2 right layout; log x-axis; dashed reference lines for SOTA/GPT-4o"
+    },
+    {
+      "index": 2,
+      "original_ref": "Figure 5",
+      "chart_type": "multi_panel_line_logscale",
+      "description": "Power law fits (c=exp(ak^b)) for 8 model-task combinations in 2×4 grid",
+      "files": {
+        "original": "2.1_原图.png",
+        "reproduced": "2.2_生成图.png",
+        "comparison": "2.3_对比图.png"
+      },
+      "data_source": "Figure 5 annotations (a, b, Error values directly labeled in figure — exact)",
+      "quality_notes": "Blue coverage + orange fit overlay; multi-line titles with params and error"
+    },
+    {
+      "index": 3,
+      "original_ref": "Figure 8",
+      "chart_type": "sorted_bar",
+      "description": "Fraction of correct samples per problem (sorted), colored by majority voting correctness",
+      "files": {
+        "original": "3.1_原图.png",
+        "reproduced": "3.2_生成图.png",
+        "comparison": "3.3_对比图.png"
+      },
+      "data_source": "Beta distribution simulation from known pass@1 rates (128 problems, 10000 samples)",
+      "quality_notes": "Green/red bars; no x-axis ticks; percentage y-axis; 1×4 layout"
+    }
+  ]
+}

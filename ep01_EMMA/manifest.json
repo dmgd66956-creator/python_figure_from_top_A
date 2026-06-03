@@ -1,0 +1,49 @@
+{
+  "date": "2026-05-06",
+  "paper": {
+    "title": "Can MLLMs Reason in Multimodality? EMMA: An Enhanced MultiModal ReAsoning Benchmark",
+    "venue": "ICML 2025",
+    "pdf_file": "paper.pdf"
+  },
+  "figures": [
+    {
+      "index": 1,
+      "original_ref": "Figure 5",
+      "chart_type": "pie",
+      "description": "o1 模型在 EMMA 上的错误类型分布",
+      "files": {
+        "original": "1.1_原图.png",
+        "reproduced": "1.2_生成图.png",
+        "comparison": "1.3_对比图.png"
+      },
+      "data_source": "Figure 5 标注百分比",
+      "quality_notes": "百分比精确，颜色从原图采样"
+    },
+    {
+      "index": 2,
+      "original_ref": "Figure 7",
+      "chart_type": "grouped_bar",
+      "description": "CoT 与 Direct 推理准确率差异对比",
+      "files": {
+        "original": "2.1_原图.png",
+        "reproduced": "2.2_生成图.png",
+        "comparison": "2.3_对比图.png"
+      },
+      "data_source": "Figure 7 像素读取",
+      "quality_notes": "±1% 误差"
+    },
+    {
+      "index": 3,
+      "original_ref": "Figure 3",
+      "chart_type": "nested_donut",
+      "description": "EMMA 数据集四大学科分布环形图",
+      "files": {
+        "original": "3.1_原图.png",
+        "reproduced": "3.2_生成图.png",
+        "comparison": "3.3_对比图.png"
+      },
+      "data_source": "Figure 3 标注百分比",
+      "quality_notes": "仅复现内圈学科分布"
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "paper": {
+    "title": "Can MLLMs Reason in Multimodality? EMMA: An Enhanced MultiModal ReAsoning Benchmark",
+    "venue": "ICML 2025",
+    "authors": "Yunzhuo Hao, Jiawei Gu, Ying-Cong Chen, et al.",
+    "summary": "本文提出 EMMA 基准，首次系统评估多模态大模型的视觉推理能力。涵盖数学、物理、化学、编程四大学科，1770 道需要真正视觉理解的题目。实验发现当前最强模型（o1）仅达 64% 准确率，远低于人类专家的 85%，揭示了 MLLMs 在视觉推理上的重大短板。"
+  },
+  "figure1": {
+    "original_ref": "Figure 5",
+    "chart_type": "pie",
+    "description": "o1 模型错误类型分布饼图",
+    "data": {
+      "categories": ["Perceptual Error", "Visual Reasoning Error", "Text Reasoning Error", "Lack of Knowledge"],
+      "values": [30.19, 52.83, 9.43, 7.55],
+      "colors": ["#4A90C4", "#F5A623", "#E85C5C", "#7BC8A4"]
+    },
+    "source": "Figure 5 标注百分比（精确）"
+  },
+  "figure2": {
+    "original_ref": "Figure 7",
+    "chart_type": "grouped_bar",
+    "description": "CoT vs Direct 准确率差异对比（2D Transformation + Multi-Hop Counting）",
+    "data": {
+      "categories": ["Claude 3.5 Sonnet", "GPT-4o", "Gemini 2.0 Flash", "InternVL2.5", "LLaVA-OneVision", "Qwen2-VL"],
+      "subplot1_title": "2D Transformation",
+      "subplot1_closed": [0.0, -3.0, -5.0, -5.0, -5.0, -6.0],
+      "subplot1_open": [0.0, -3.0, -5.0, -5.0, -5.0, -6.0],
+      "subplot2_title": "Multi-Hop Counting",
+      "subplot2_closed": [11.0, 1.5],
+      "subplot2_open": [0.0, -5.0, -5.0, 0.0],
+      "series": ["Closed-Source", "Open-Source"],
+      "colors": ["#4472A8", "#F08020"]
+    },
+    "source": "Figure 7 像素读取 ±1%"
+  },
+  "figure3": {
+    "original_ref": "Figure 3",
+    "chart_type": "nested_donut",
+    "description": "EMMA 数据集学科与子类别分布（嵌套环形图）",
+    "data": {
+      "inner_ring": {
+        "categories": ["Math", "Chemistry", "Physics", "Coding"],
+        "values": [32, 42, 6, 20],
+        "colors": ["#F5E6A8", "#B8D4A8", "#D4B8D4", "#F5D0B8"]
+      },
+      "note": "外圈子类别数据复杂，简化为仅复现内圈4学科分布"
+    },
+    "source": "Figure 3 标注百分比"
+  }
+}

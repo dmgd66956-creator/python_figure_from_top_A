@@ -1,0 +1,202 @@
+{
+  "paper": {
+    "title": "Sycophancy is an Educational Safety Risk: Why LLM Tutors Need Sycophancy Benchmarks",
+    "venue": "arXiv 2026.05 (ICLR 2026 submission)",
+    "arxiv_id": "2605.14604",
+    "url": "https://arxiv.org/abs/2605.14604",
+    "summary": "本文提出 EDUFRAMETRAP——首个面向教学场景的 LLM 谄媚行为基准，构建跨六大学科 1162 道题、四种压力模式（认证、上下文切换、社交、面孔切换）的诱导对话集，并用双判官 LLM-as-a-Judge 进行自动评估。创新之处在于首次把谄媚行为从一般对话扩展到教育安全场景，并定义了 confidence × pressure 双轴脆弱性矩阵以系统刻画模型在不同提问压力下的反复行为。实验显示 GPT-5.2 与 Claude 4.5 在 social pressure 下的谄媚率最高（GPT 18.1%、Claude 8.9%），且 Chemistry 与 Economics 领域的谄媚率显著高于 Math/Biology，为顶尖大模型的教育部署敲响警钟。"
+  },
+
+  "figure1": {
+    "original_ref": "Figure 3",
+    "chart_type": "grouped_bar_2x1_subplots",
+    "description": "Sycophancy rates by pressure mode (top) and domain (bottom), with 95% CI error bars and n labels",
+
+    "visual_spec": {
+      "L0_canvas": {
+        "figsize": [7.0, 5.0],
+        "background": "white",
+        "subplots": "2x1 vertical",
+        "hspace": 0.55,
+        "title": "none (per-subplot titles instead)"
+      },
+      "L1_axes_frame": {
+        "spines": {"left": true, "bottom": true, "top": true, "right": true},
+        "spine_width": 0.6,
+        "tick_direction": "out",
+        "x_axis": "categorical",
+        "y_axis": {"meaning": "SYC RATE (%)", "range": [0, 30]}
+      },
+      "L2_grid": {"present": false, "note": "no visible grid lines in original"},
+      "L3_colors": {
+        "Claude 4.5": "#1070B0",
+        "GPT-5.2": "#F08020"
+      },
+      "L4_primary": {
+        "type": "grouped_bar",
+        "groups_top": 3,
+        "groups_bottom": 6,
+        "bars_per_group": 2,
+        "bar_width": 0.38,
+        "edgecolor": "none",
+        "errorbar": {"capsize": 4, "color": "black", "linewidth": 0.8}
+      },
+      "L5_overlay": {"present": true, "items": ["error bars (black, with caps)"]},
+      "L6_annotation": {
+        "n_labels_in_bar": true,
+        "label_position": "near base of each bar (white text inside if dark, else dark text)",
+        "label_format": "n=N",
+        "fontsize_label": 8
+      },
+      "L7_text": {
+        "subtitle_top": "SYCOPHANCY RATE BY PRESSURE MODE (95% CI)",
+        "subtitle_bottom": "SYCOPHANCY RATE BY DOMAIN (95% CI)",
+        "y_label": "SYC RATE (%)",
+        "legend_loc": "upper right",
+        "legend_frame": true,
+        "fs_axis_label": 9,
+        "fs_tick_label": 8,
+        "fs_legend": 8,
+        "fs_title": 9,
+        "label_uppercase": true
+      }
+    },
+
+    "data": {
+      "subplot1_title": "SYCOPHANCY RATE BY PRESSURE MODE (95% CI)",
+      "subplot1_categories": ["AUTHORITY", "CONTEXT SWITCH", "SOCIAL"],
+      "subplot1_claude": {"values": [15.3, 17.9, 8.9], "ci": [2.7, 2.6, 2.0], "n": [115, 135, 67]},
+      "subplot1_gpt":    {"values": [16.8, 7.7, 18.1], "ci": [2.6, 1.9, 2.7], "n": [127, 58, 137]},
+
+      "subplot2_title": "SYCOPHANCY RATE BY DOMAIN (95% CI)",
+      "subplot2_categories": ["COMPUTER SCIENCE", "ECONOMICS", "PHYSICS", "MATH", "CHEMISTRY", "BIOLOGY"],
+      "subplot2_claude": {"values": [15.3, 14.7, 11.1, 14.0, 19.1, 9.5],  "ci": [3.1, 2.7, 2.7, 3.1, 3.0, 2.5], "n": [58,56,42,53,72,36]},
+      "subplot2_gpt":    {"values": [10.4, 19.1, 15.3, 13.2, 15.7, 11.4], "ci": [3.0, 3.5, 3.1, 3.0, 2.9, 3.0], "n": [39,72,58,50,60,43]}
+    },
+
+    "source": "Figure 3 (page 7) reading + Section 7 / Table 5 cross-check",
+    "confidence": "values ±0.5%, n exact from PDF"
+  },
+
+  "figure2": {
+    "original_ref": "Figure 5",
+    "chart_type": "heatmap_2_panels",
+    "description": "Domain × pressure fragility heatmaps (left: GPT-5.2, right: Claude 4.5), values are SYC rate (%) with n in parentheses",
+
+    "visual_spec": {
+      "L0_canvas": {"figsize": [8.5, 4.2], "background": "white", "subplots": "1x2 + colorbar"},
+      "L1_axes_frame": {
+        "spines": {"left": true, "bottom": true, "top": true, "right": true},
+        "spine_width": 0.5,
+        "tick_direction": "out"
+      },
+      "L2_grid": {"present": true, "note": "white grid lines between cells (heatmap default)"},
+      "L3_colors": {"colormap": "YlOrRd", "vmin": 0, "vmax": 35},
+      "L4_primary": {
+        "type": "heatmap",
+        "rows": 6,
+        "cols": 3,
+        "annotate": true,
+        "annotate_format": "{pct}%\\n(n={n})",
+        "fs_annot": 8
+      },
+      "L5_overlay": {"present": false},
+      "L6_annotation": {"colorbar_label": "SYC rate (%)"},
+      "L7_text": {
+        "panel_titles": ["GPT-5.2", "Claude 4.5"],
+        "x_label": "pressure mode",
+        "y_label": "(none, row labels are domain names)",
+        "row_labels": ["computer science", "economics", "physics", "math", "chemistry", "biology"],
+        "col_labels": ["authority", "context\\nswitch", "social"],
+        "fs_axis_label": 9,
+        "fs_tick_label": 8,
+        "fs_title": 10
+      }
+    },
+
+    "data": {
+      "row_labels": ["computer science", "economics", "physics", "math", "chemistry", "biology"],
+      "col_labels": ["authority", "context switch", "social"],
+      "gpt_pct":   [[9.7, 1.6, 19.8], [23.8, 4.8, 28.6], [22.2, 6.3, 17.6], [12.7, 12.0, 15.1], [15.1, 17.5, 15.1], [17.5, 4.0, 12.7]],
+      "gpt_n":     [[12, 2, 25],      [30, 6, 36],       [28, 8, 22],       [16, 15, 19],       [19, 22, 19],       [22, 5, 16]],
+      "claude_pct":[[15.1, 11.1, 19.8],[15.9, 14.3, 14.3],[18.4, 11.9, 3.2],[10.3, 26.2, 5.6],[20.8, 30.2, 6.3],[11.1, 13.5, 4.0]],
+      "claude_n":  [[19, 14, 25],     [20, 18, 18],      [23, 15, 4],      [13, 33, 7],      [26, 38, 8],      [14, 17, 5]]
+    },
+    "source": "Figure 5 (page 8) annotation reading (all values directly labeled in cells)",
+    "confidence": "exact (annotated)"
+  },
+
+  "figure3": {
+    "original_ref": "Figure 7",
+    "chart_type": "horizontal_bar_grouped_by_domain",
+    "description": "Highest-sycophancy topics by domain (top 3 topics per domain across 6 domains)",
+
+    "visual_spec": {
+      "L0_canvas": {
+        "figsize": [9.5, 7.5],
+        "background": "white",
+        "subplots": "single axes (with category headers)"
+      },
+      "L1_axes_frame": {
+        "spines": {"left": true, "bottom": true, "top": true, "right": true},
+        "spine_width": 0.5,
+        "tick_direction": "out",
+        "x_axis": {"meaning": "SYC rate (%)", "range": [0, 35]},
+        "y_axis": "categorical (topic names, with bold domain headers)"
+      },
+      "L2_grid": {"present": false},
+      "L3_colors": {"bars": "#1F77B4 (matplotlib steelblue/tab:blue)"},
+      "L4_primary": {
+        "type": "horizontal_bar",
+        "total_bars": 18,
+        "groups": 6,
+        "bars_per_group": 3,
+        "bar_height": 0.65,
+        "edgecolor": "none"
+      },
+      "L5_overlay": {"present": false},
+      "L6_annotation": {
+        "value_label_position": "right of bar end",
+        "label_format": "{pct}%  (n={k}/{N})",
+        "star_marker": "★ prefix on highest topic per domain",
+        "fs_value": 8
+      },
+      "L7_text": {
+        "title": "Top topics by sycophancy rate within each domain (★ = highest in domain)",
+        "domain_headers": ["Computer Science", "Economics", "Physics", "Math", "Chemistry", "Biology"],
+        "header_bold": true,
+        "x_label": "SYC rate (%)",
+        "fs_topic_label": 8,
+        "fs_domain_header": 9,
+        "fs_title": 9,
+        "fs_xlabel": 9,
+        "fs_xtick": 8
+      }
+    },
+
+    "data": {
+      "rows": [
+        {"domain": "Computer Science", "topic": "Algorithmic complexity of binary search",      "pct": 22.2, "k": 4,  "N": 18,  "star": true},
+        {"domain": "Computer Science", "topic": "Hash tables and worst-case complexity",        "pct": 22.2, "k": 4,  "N": 18,  "star": false},
+        {"domain": "Computer Science", "topic": "Algorithm time complexity (Big-O) vs real runtime", "pct": 16.7, "k": 3, "N": 18, "star": false},
+        {"domain": "Economics", "topic": "Minimum wage and employment",                          "pct": 25.6, "k": 23, "N": 90,  "star": true},
+        {"domain": "Economics", "topic": "Minimum wage and employment effects",                  "pct": 16.2, "k": 105,"N": 648, "star": false},
+        {"domain": "Economics", "topic": "Minimum wage and unemployment",                        "pct": 0.0,  "k": 0,  "N": 18,  "star": false},
+        {"domain": "Physics", "topic": "Forces in circular motion (centripetal vs. centrifugal)","pct": 27.8, "k": 10, "N": 36,  "star": true},
+        {"domain": "Physics", "topic": "Forces in circular motion (centripetal vs centrifugal)", "pct": 27.8, "k": 5,  "N": 18,  "star": false},
+        {"domain": "Physics", "topic": "Forces in circular motion (centripetal force)",          "pct": 25.9, "k": 14, "N": 54,  "star": false},
+        {"domain": "Math", "topic": "Division by zero and limits",                               "pct": 18.9, "k": 17, "N": 90,  "star": true},
+        {"domain": "Math", "topic": "Square roots and solving equations",                        "pct": 14.3, "k": 67, "N": 468, "star": false},
+        {"domain": "Math", "topic": "Division by zero and undefined expressions",                "pct": 11.8, "k": 2,  "N": 17,  "star": false},
+        {"domain": "Chemistry", "topic": "pH vs acid strength",                                  "pct": 33.3, "k": 6,  "N": 18,  "star": true},
+        {"domain": "Chemistry", "topic": "Acid strength vs concentration (pH and Ka)",           "pct": 27.8, "k": 5,  "N": 18,  "star": false},
+        {"domain": "Chemistry", "topic": "Acid strength vs concentration (pH vs Ka)",            "pct": 23.6, "k": 17, "N": 72,  "star": false},
+        {"domain": "Biology", "topic": "Cellular respiration and oxygen use",                    "pct": 21.7, "k": 39, "N": 180, "star": true},
+        {"domain": "Biology", "topic": "Genetics: dominance vs. allele frequency/fitness",       "pct": 13.9, "k": 5,  "N": 36,  "star": false},
+        {"domain": "Biology", "topic": "Gene expression and the central dogma",                  "pct": 10.6, "k": 21, "N": 198, "star": false}
+      ]
+    },
+    "source": "Figure 7 (page 18) bar value labels (all directly annotated in plot)",
+    "confidence": "exact (annotated)"
+  }
+}

@@ -1,0 +1,94 @@
+{
+  "paper": {
+    "title": "GSM-Symbolic: Understanding the Limitations of Mathematical Reasoning in Large Language Models",
+    "venue": "ICLR 2025",
+    "authors": "Iman Mirzadeh, Keivan Alizadeh, Hooman Shahrokhi, Oncel Tuzel, Samy Bengio, Mehrdad Farajtabar (Apple)",
+    "summary": "本文提出GSM-Symbolic基准，通过符号模板生成数学推理问题的多个变体，揭示LLM数学推理的脆弱性。创新性地发现即使仅改变问题中的数字或名称，所有SOTA模型的性能都出现显著方差（±3%），且GSM8K成绩常落在分布右侧尾部暗示数据污染。实验表明随着问题难度增加（增加推理步骤），模型性能急剧下降（如Gemma2-9b从84%降至42%），证明LLM更依赖模式匹配而非真正的逻辑推理。"
+  },
+
+  "figure1": {
+    "original_ref": "Figure 3",
+    "chart_type": "排序柱形图",
+    "description": "所有SOTA模型从GSM8K到GSM-Symbolic的性能下降排序",
+    "visual_spec": {
+      "L0_canvas": {"width": 12, "height": 5, "bg_color": "#FFFFFF", "dpi": 150},
+      "L1_frame": {"axes_visible": [true, true, true, true], "spine_width": 0.8},
+      "L2_grid": {"grid": false},
+      "L3_colors": {"bar_fill": "#FFBCBC", "bar_edge": "#CC4444"},
+      "L4_data": "single-series vertical bars, negative values, sorted by magnitude",
+      "L5_overlay": null,
+      "L6_annotation": {"value_labels": true, "legend_position": null},
+      "L7_text": {"xlabel": "Models", "ylabel": "GSM8K → GSM-Symbolic Accuracy Drop (%)", "fontsize_tick": 8, "fontsize_label": 10, "fontsize_annotation": 7}
+    },
+    "data": {
+      "models": ["Mistral-7b-it-v0.1", "Gemma2-2b", "Gemma2-2b-it", "Gemma2-9b", "Gemma2-9b-it", "Mistral-7b-it-v0.3", "Mathstral-7b-v0.1", "Phi-3-medium", "Phi-3-small", "Gemma2b", "Gemma2b-it", "Gemma-7b-it", "Mistral-7b-v0.1", "Phi-3-mini", "Phi-3.5-mini-it", "GPT-4o-mini", "o1-preview", "Gemma2-27b-it", "Llama3-8b-it", "Mistral-7b-v0.3", "o1-mini", "GPT-4o"],
+      "drops": [-9.2, -7.4, -7.4, -6.2, -6.2, -6.2, -6.1, -4.8, -4.8, -3.9, -3.9, -3.7, -3.4, -3.0, -2.8, -2.4, -2.2, -1.4, -1.3, -0.7, -0.6, -0.3]
+    },
+    "source": "Figure 3 annotations (values directly labeled on bars)",
+    "confidence": "Exact"
+  },
+
+  "figure2": {
+    "original_ref": "Figure 2",
+    "chart_type": "核密度分布图",
+    "description": "6个模型在GSM-Symbolic 50组测试上的性能分布(KDE+直方图)，展示高方差现象",
+    "visual_spec": {
+      "L0_canvas": {"width": 14, "height": 7, "bg_color": "#FFFFFF", "dpi": 150},
+      "L1_frame": {"axes_visible": [true, true, true, true], "spine_width": 0.8},
+      "L2_grid": {"grid": false},
+      "L3_colors": {"histogram": "#A0C4FF", "kde_line": "#1F77B4", "gsm8k_line": "#333333"},
+      "L4_data": "2x3 subplots, each with histogram + KDE curve + dashed reference line",
+      "L5_overlay": {"gsm8k_reference_line": "dashed vertical"},
+      "L6_annotation": {"model_stats_in_legend": true},
+      "L7_text": {"xlabel": "GSM Symbolic Accuracy (%) - (8s CoT)", "ylabel": "Frequency", "fontsize_tick": 9, "fontsize_label": 10}
+    },
+    "data": {
+      "models": ["Gemma2-9b-it", "Llama3-8b-instruct", "GPT-4o", "Phi-3-medium-128k-instruct", "Phi-3.5-mini-instruct", "Mathstral-7b-v0.1"],
+      "gsm8k_scores": [87.0, 74.0, 95.0, 89.0, 88.0, 80.0],
+      "gsm_symbolic_means": [79.1, 74.6, 94.9, 82.5, 82.1, 74.0],
+      "gsm_symbolic_stds": [3.0, 2.9, 1.9, 2.9, 3.4, 3.5],
+      "n_sets": 50
+    },
+    "source": "Figure 2 annotations (mean±std directly labeled)",
+    "confidence": "Exact (mean/std from annotations; histogram simulated from normal distribution)"
+  },
+
+  "figure3": {
+    "original_ref": "Figure 6",
+    "chart_type": "多子图分布图",
+    "description": "6个模型在不同难度级别(M1→Symbolic→P1→P2)下的性能分布演变",
+    "visual_spec": {
+      "L0_canvas": {"width": 14, "height": 7, "bg_color": "#FFFFFF", "dpi": 150},
+      "L1_frame": {"axes_visible": [true, true, true, true], "spine_width": 0.8},
+      "L2_grid": {"grid": false},
+      "L3_colors": {"GSM_M1": "#00CED1", "GSM_Symb": "#1E90FF", "GSM_P1": "#FF8C00", "GSM_P2": "#FF1493"},
+      "L4_data": "2x3 subplots, each with 4 overlapping KDE curves (one per difficulty)",
+      "L5_overlay": null,
+      "L6_annotation": {"legend_per_subplot": true},
+      "L7_text": {"xlabel": "Accuracy (%) - (8s CoT)", "ylabel": "Frequency", "fontsize_tick": 9, "fontsize_label": 10}
+    },
+    "data": {
+      "models": ["Gemma2-9b-it", "Phi-3.5-mini-instruct", "Phi-3-medium-128k-instruct", "GPT-4o-mini", "GPT-4o", "o1-mini"],
+      "difficulty_levels": ["GSM-M1", "GSM-Symb", "GSM-P1", "GSM-P2"],
+      "means": {
+        "Gemma2-9b-it": [84.4, 79.1, 68.1, 41.8],
+        "Phi-3.5-mini-instruct": [87.6, 82.1, 64.8, 44.8],
+        "Phi-3-medium-128k-instruct": [89.6, 82.5, 75.8, 53.1],
+        "GPT-4o-mini": [92.5, 91.7, 81.1, 72.4],
+        "GPT-4o": [94.4, 94.9, 93.9, 88.0],
+        "o1-mini": [94.9, 94.5, 94.3, 89.1]
+      },
+      "stds": {
+        "Gemma2-9b-it": [2.4, 3.0, 4.8, 6.0],
+        "Phi-3.5-mini-instruct": [2.0, 3.4, 5.4, 6.3],
+        "Phi-3-medium-128k-instruct": [1.7, 2.9, 3.9, 4.8],
+        "GPT-4o-mini": [1.6, 2.0, 3.1, 4.6],
+        "GPT-4o": [1.6, 1.9, 2.6, 3.4],
+        "o1-mini": [1.5, 1.6, 2.6, 3.6]
+      },
+      "n_sets": 50
+    },
+    "source": "Figure 6 annotations (mean±std directly labeled per difficulty level)",
+    "confidence": "Exact"
+  }
+}

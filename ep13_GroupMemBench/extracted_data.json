@@ -1,0 +1,122 @@
+{
+  "paper": {
+    "title": "GroupMemBench: Benchmarking LLM Agent Memory in Multi-Party Conversations",
+    "venue": "arXiv 2026.05 (NeurIPS 2026 submission)",
+    "authors": "Jingbo Yang, Kwei-Herng Lai, Xiaowen Wang, Shiyu Chang, Yaar Harari, Evgeniy Gabrilovich",
+    "arxiv_id": "2605.14498",
+    "summary": "本文提出 GroupMemBench，针对多方群聊场景评测 LLM 智能体记忆系统，结合图引导合成对话与对抗式查询管线生成基准。创新点在于首次把记忆评测从单用户推广到多人协作场景，覆盖 Multi-Hop、Update 等六类对抗任务跨四领域。结果显示主流记忆系统在 Multi-Hop 均不到 50%，BM25 平均 43.2% 反超四个智能体记忆系统。"
+  },
+
+  "figure1": {
+    "original_ref": "Figure 3",
+    "chart_type": "grouped_bar",
+    "description": "六个 G-Eval 维度上 Baseline / Ours (graph-guided) / Real-world 的对话质量得分对比",
+    "structure": {
+      "subplots": 1,
+      "layout": "single panel, horizontal grouped bars",
+      "x_axis": {"meaning": "G-Eval 维度", "type": "categorical", "count": 6},
+      "y_axis": {"meaning": "G-Eval Score", "type": "continuous", "range": [3, 5]},
+      "series_count": 3,
+      "series": [
+        {"name": "Baseline", "color": "#62c4d3", "style": "solid fill"},
+        {"name": "Ours", "color": "#508f8f", "style": "solid fill"},
+        {"name": "Real-world", "color": "#e0b260", "style": "solid fill"}
+      ],
+      "data_points_per_series": 6,
+      "additional_elements": ["error bars (vertical, black, ±1 std)", "horizontal grid lines (light gray)", "legend below x-axis"]
+    },
+    "data": {
+      "categories": ["Nat.", "Coh.", "Div.", "Ctx.", "Mom.", "Eng."],
+      "Baseline_mean": [4.00, 4.00, 3.70, 4.00, 4.30, 3.10],
+      "Baseline_std":  [0.05, 0.10, 0.30, 0.05, 0.45, 0.45],
+      "Ours_mean":      [5.00, 4.75, 4.90, 5.00, 5.00, 4.95],
+      "Ours_std":       [0.02, 0.20, 0.20, 0.02, 0.05, 0.10],
+      "Real_mean":     [5.00, 4.85, 5.00, 5.00, 5.00, 5.00],
+      "Real_std":      [0.02, 0.30, 0.02, 0.02, 0.02, 0.02]
+    },
+    "source": "Figure 3 视觉读取（柱顶位置 + ±1 std 误差线，与正文 Section 3.2 描述一致）",
+    "confidence": "柱高读取误差 ±0.1, std 估计 ±0.1"
+  },
+
+  "figure2": {
+    "original_ref": "Figure 6",
+    "chart_type": "annotated_heatmap",
+    "description": "P(correct | gold retrieved) 在 Technology 与 Finance 两个领域、7 个 baseline × 5 个查询类型上的分布",
+    "structure": {
+      "subplots": 2,
+      "layout": "1×2 (Technology 左, Finance 右), 共享 colorbar",
+      "rows": 7,
+      "columns": 5,
+      "row_labels": "baseline 名称（按各 panel 内行平均降序排列）",
+      "column_labels": "查询类型 Multi-Hop / Update / Temporal / Implicit / Ambiguity",
+      "value_range": [0, 100],
+      "colormap": "PiYG (purple-low → green-high)",
+      "has_annotation": true,
+      "annotation_format": "整数百分比",
+      "additional_elements": ["panel 标题 Technology / Finance", "右侧共享 colorbar (P(correct | gold retrieved), 0-1.0)", "x 轴标签旋转 45°"]
+    },
+    "data": {
+      "col_labels": ["Multi-Hop", "Update", "Temporal", "Implicit", "Ambiguity"],
+      "tech_row_labels": ["BM25", "HippoRAG", "A-MEM", "Hindsight", "MemGPT", "text-emb", "Mem0"],
+      "tech_values": [
+        [75, 61, 87, 56, 60],
+        [57, 48, 67, 72, 80],
+        [69, 57, 80, 76, 25],
+        [73, 21, 77, 65, 71],
+        [44, 41, 45, 62, 100],
+        [73, 41, 56, 83, 33],
+        [20, 0, 100, 50, 12]
+      ],
+      "fin_row_labels": ["Hindsight", "text-emb", "BM25", "HippoRAG", "A-MEM", "Mem0", "MemGPT"],
+      "fin_values": [
+        [79, 77, 86, 43, 73],
+        [84, 57, 95, 80, 33],
+        [90, 69, 95, 73, 17],
+        [86, 67, 94, 50, 36],
+        [82, 60, 71, 40, 30],
+        [89, 25, 62, 40, 14],
+        [60, 43, 33, 27, 27]
+      ]
+    },
+    "source": "Figure 6 单元格内整数标注直接抄录",
+    "confidence": "精确（图中已显式标注数值）"
+  },
+
+  "figure3": {
+    "original_ref": "Figure 5 (Left)",
+    "chart_type": "stacked_bar",
+    "description": "Failure-mode decomposition：每个 baseline 在 Technology / Finance 两个领域的 185 道非弃答题，按 correct / 推理失败 / 检索失败 三类分解",
+    "structure": {
+      "subplots": 2,
+      "layout": "1×2 (Technology 左, Finance 右), 共享图例",
+      "x_axis": {"meaning": "fraction of questions (%)", "type": "continuous", "range": [0, 100]},
+      "y_axis": {"meaning": "baseline 名称（按 correct 降序）", "type": "categorical", "count": 7},
+      "series_count": 3,
+      "series": [
+        {"name": "correct", "color": "#5aa672", "style": "solid fill"},
+        {"name": "retrieved gold, wrong answer (reasoning fail)", "color": "#508f8f", "style": "solid fill"},
+        {"name": "missed gold (retrieval fail)", "color": "#62c4d3", "style": "solid fill"}
+      ],
+      "data_points_per_series": 7,
+      "orientation": "horizontal",
+      "additional_elements": [
+        "panel 标题 Technology / Finance",
+        "段内白色数值标注（百分比，整数）",
+        "白色窄间隔分隔三段",
+        "底部共享图例三色块"
+      ]
+    },
+    "data": {
+      "tech_row_labels": ["BM25", "Hindsight", "A-MEM", "HippoRAG", "text-emb", "MemGPT", "Mem0"],
+      "tech_correct":         [41, 37, 34, 32, 30, 23, 12],
+      "tech_reasoning_fail":  [14, 17, 12, 15, 11, 18,  9],
+      "tech_retrieval_fail":  [45, 45, 55, 53, 58, 59, 79],
+      "fin_row_labels": ["Hindsight", "HippoRAG", "text-emb", "A-MEM", "BM25", "MemGPT", "Mem0"],
+      "fin_correct":          [48, 46, 40, 39, 37, 28, 21],
+      "fin_reasoning_fail":   [ 9, 13,  9, 14,  9, 24, 10],
+      "fin_retrieval_fail":   [44, 41, 51, 46, 55, 49, 70]
+    },
+    "source": "Figure 5 (Left) 段内整数标注直接抄录（每行三段相加约等于 100）",
+    "confidence": "精确（图中已显式标注百分比）"
+  }
+}

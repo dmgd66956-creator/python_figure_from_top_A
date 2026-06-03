@@ -1,0 +1,49 @@
+{
+  "date": "2026-05-17",
+  "paper": {
+    "title": "Forgetting That Sticks: Quantization-Permanent Unlearning via Circuit Attribution",
+    "venue": "arXiv 2026.05 (cs.LG)",
+    "pdf_path": "paper.pdf"
+  },
+  "figures": [
+    {
+      "index": 1,
+      "original_ref": "Figure 1 (a) Global GA panel",
+      "chart_type": "histogram",
+      "description": "Per-parameter update magnitude histogram for Global Gradient Ascent — diffuse mass far below NF4 quantization threshold delta_i.",
+      "files": {
+        "original": "1.1_原图.png",
+        "reproduced": "1.2_生成图.png",
+        "comparison": "1.3_对比图.png"
+      },
+      "data_source": "Figure 1 (a) shape + Table 15 RMS=1.21e-6 + Definition 1 delta_i=8.4e-4",
+      "quality_notes": "shape modeled as narrow lognormal centered at log10(1.21e-6) with delta_i marker"
+    },
+    {
+      "index": 2,
+      "original_ref": "Figure 1 (c) MANSU panel",
+      "chart_type": "histogram",
+      "description": "MANSU per-parameter update magnitudes — magnitude floor clamps updates above delta_i so >=95% cross the NF4 bin boundary; with zoom inset.",
+      "files": {
+        "original": "2.1_原图.png",
+        "reproduced": "2.2_生成图.png",
+        "comparison": "2.3_对比图.png"
+      },
+      "data_source": "Figure 1 (c) main + zoom inset + Lemma 1 floor",
+      "quality_notes": "clamped lognormal above delta_i; inset zoom on [-3.4, -2.7]"
+    },
+    {
+      "index": 3,
+      "original_ref": "Figure 3 (three-panel scorecard)",
+      "chart_type": "scatter",
+      "description": "Four-property scorecard: PTQ gap (a), MMLU loss (b), AS-NC structural localization (c) vs forget delta. MANSU uniquely passes all four properties.",
+      "files": {
+        "original": "3.1_原图.png",
+        "reproduced": "3.2_生成图.png",
+        "comparison": "3.3_对比图.png"
+      },
+      "data_source": "Figure 3 panels (a)(b)(c) + Table 2 (BF16/NF4/delta_PTQ/MMLU) + Table 3 (AS-NC)",
+      "quality_notes": "marker shape encodes dataset; color encodes method; solid/hollow fill encodes pass/fail"
+    }
+  ]
+}

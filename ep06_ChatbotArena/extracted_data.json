@@ -1,0 +1,113 @@
+{
+  "paper": {
+    "title": "Chatbot Arena: An Open Platform for Evaluating LLMs by Human Preference",
+    "venue": "ICML 2024",
+    "authors": "Wei-Lin Chiang, Lianmin Zheng, Ying Sheng, Anastasios N. Angelopoulos, et al.",
+    "summary": "本文提出Chatbot Arena，首个大规模众包LLM对战评测平台，通过用户匿名投票的两两对比机制收集24万+偏好数据。创新性地引入Bradley-Terry统计模型结合主动采样算法，实现高效可靠的模型排名与置信区间估计。实验证明众包投票与专家评估的一致率达72-83%，平台排名已成为业界公认的LLM能力参考标准。"
+  },
+
+  "figure1": {
+    "original_ref": "Figure 4",
+    "chart_type": "horizontal_grouped_bar",
+    "description": "Arena Bench与MT Bench在不同模型上的分数对比，展示Arena Bench对模型区分度更高",
+    "visual_spec": {
+      "L0_canvas": {"width": 7, "height": 5, "bg_color": "#FFFFFF", "dpi": 150},
+      "L1_frame": {"axes_visible": [true, true, true, true], "spine_width": 0.8},
+      "L2_grid": {"grid": false},
+      "L3_colors": {
+        "arena_bench": "#E24A33",
+        "mt_bench": "#348ABD"
+      },
+      "L4_data": "horizontal grouped bars",
+      "L5_overlay": null,
+      "L6_annotation": {"legend_position": "upper right"},
+      "L7_text": {"title": null, "xlabel": "Score", "ylabel": "Model", "fontsize_tick": 9, "fontsize_label": 11}
+    },
+    "data": {
+      "models": ["GPT-4-Turbo", "GPT-4-0314", "GPT-4-0613", "GPT-3.5-Turbo-0613", "Claude-2.1", "Mixtral-8x7B-Instruct", "Starling-LM-7B-alpha", "OpenChat-3.5", "Vicuna-33b-v1.3", "Llama-2-70B-Chat", "Llama-2-13b-Chat"],
+      "arena_bench": [8.96, 8.49, 8.22, 7.68, 6.82, 6.48, 6.12, 5.78, 4.10, 3.60, 3.10],
+      "mt_bench": [8.99, 8.96, 8.39, 7.94, 8.06, 7.60, 7.51, 7.28, 6.92, 6.52, 5.88]
+    },
+    "source": "Figure 4 (pixel-calibrated from bar lengths, x-axis 0-9 range)",
+    "confidence": "Bar lengths pixel-estimated ±0.15"
+  },
+
+  "figure2": {
+    "original_ref": "Figure 5",
+    "chart_type": "forest_plot",
+    "description": "各模型BT系数(ξ)的置信区间，含/不含多重比较校正，展示模型排名的不确定性",
+    "visual_spec": {
+      "L0_canvas": {"width": 6, "height": 9, "bg_color": "#FFFFFF", "dpi": 150},
+      "L1_frame": {"axes_visible": [true, true, false, false], "spine_width": 0.8},
+      "L2_grid": {"grid": false},
+      "L3_colors": {
+        "corrected": "#E24A33",
+        "uncorrected": "#348ABD"
+      },
+      "L4_data": "point estimates with horizontal error bars",
+      "L5_overlay": null,
+      "L6_annotation": {"legend_position": "upper right", "rank_labels": true},
+      "L7_text": {"xlabel": "ξ", "ylabel": null, "fontsize_tick": 8, "fontsize_label": 11}
+    },
+    "data": {
+      "models": [
+        "gpt-4-turbo", "gpt-4-0314", "gpt-4-0613",
+        "mistral-medium", "claude-1", "claude-2.0",
+        "gemini-pro-dev-api", "mixtral-8x7b-instruct-v0.1",
+        "claude-2.1", "gpt-3.5-turbo-0613", "gemini-pro",
+        "claude-instant-1", "vi-33b-chat", "tulu-2-dpo-70b",
+        "wizardlm-70b", "gpt-3.5-turbo-0314",
+        "starling-lm-7b-alpha", "openhermes-2.5-mistral-7b",
+        "llama-2-70b-chat", "openchat-3.5",
+        "gpt-3.5-turbo-1106", "pplx-70b-online",
+        "dolphin-2.2.1-mistral-7b", "solar-10.7b-instruct-v1.0",
+        "llama2-70b-steerlm-chat", "wizardlm-13b", "zephyr-7b-beta"
+      ],
+      "ranks": ["#1", "#2", "#3-7", "#3-7", "#3-8", "#3-14", "#3-18", "#4-18", "#6-18", "#6-18", "#6-18", "#6-18", "#6-19", "#6-21", "#7-22", "#7-22", "#7-26", "#12-28", "#14-28", "#14-29", "#15-29", "#17-31", "#17-37", "#18-36", "#17-37", "#19-37", "#19-37"],
+      "xi_point": [2.32, 2.15, 1.82, 1.72, 1.65, 1.50, 1.42, 1.30, 1.22, 1.18, 1.15, 1.10, 1.02, 0.95, 0.88, 0.85, 0.78, 0.62, 0.55, 0.50, 0.45, 0.35, 0.22, 0.18, 0.15, 0.08, 0.05],
+      "ci_corrected": [
+        [2.18, 2.46], [1.98, 2.32], [1.55, 2.10], [1.42, 2.02], [1.30, 2.00], [1.10, 1.90], [0.98, 1.86], [0.88, 1.72], [0.82, 1.62], [0.78, 1.58], [0.75, 1.55], [0.68, 1.52], [0.60, 1.44], [0.52, 1.38], [0.42, 1.34], [0.40, 1.30], [0.32, 1.24], [0.12, 1.12], [0.05, 1.05], [0.02, 1.00], [-0.02, 0.92], [-0.12, 0.82], [-0.22, 0.66], [-0.25, 0.61], [-0.22, 0.52], [-0.30, 0.46], [-0.32, 0.42]
+      ],
+      "ci_uncorrected": [
+        [2.24, 2.40], [2.04, 2.26], [1.65, 2.00], [1.55, 1.90], [1.48, 1.82], [1.28, 1.72], [1.18, 1.66], [1.08, 1.52], [0.98, 1.46], [0.95, 1.41], [0.92, 1.38], [0.88, 1.32], [0.80, 1.24], [0.75, 1.15], [0.65, 1.11], [0.62, 1.08], [0.55, 1.01], [0.38, 0.86], [0.32, 0.78], [0.28, 0.72], [0.22, 0.68], [0.15, 0.55], [0.02, 0.42], [0.00, 0.36], [0.00, 0.30], [-0.08, 0.24], [-0.12, 0.22]
+      ]
+    },
+    "source": "Figure 5 (pixel-calibrated from x-axis 0.0-2.5 range)",
+    "confidence": "Point estimates ±0.05, CI bounds ±0.08"
+  },
+
+  "figure3": {
+    "original_ref": "Figure 6",
+    "chart_type": "confidence_band_line",
+    "description": "BT系数的置信区间性质：Coverage收敛到1-α，区间宽度随样本数递减且受模型数M影响",
+    "visual_spec": {
+      "L0_canvas": {"width": 7, "height": 6, "bg_color": "#FFFFFF", "dpi": 150},
+      "L1_frame": {"axes_visible": [true, true, true, true], "spine_width": 0.8, "subplots": "2x1"},
+      "L2_grid": {"grid": false},
+      "L3_colors": {
+        "M4": "#1f77b4", "M7": "#ff7f0e", "M10": "#2ca02c", "M15": "#d62728", "M20": "#9467bd"
+      },
+      "L4_data": "lines with shaded confidence bands",
+      "L5_overlay": null,
+      "L6_annotation": {"legend_position": "upper right"},
+      "L7_text": {"xlabel": "n", "ylabel_top": "Coverage", "ylabel_bottom": "Average Interval Width", "title_top": "Coverage", "title_bottom": "Average Interval Width"}
+    },
+    "data": {
+      "n_values": [1000, 5000, 10000, 20000, 40000, 60000, 80000, 100000],
+      "coverage": {
+        "note": "Single line (γ=2, M implied), converges to ~0.95",
+        "mean": [0.82, 0.88, 0.91, 0.93, 0.945, 0.948, 0.949, 0.950],
+        "std": [0.06, 0.04, 0.03, 0.02, 0.015, 0.012, 0.010, 0.008]
+      },
+      "interval_width": {
+        "M4": {"mean": [1.20, 0.72, 0.55, 0.40, 0.30, 0.25, 0.22, 0.20], "std": [0.15, 0.08, 0.06, 0.04, 0.03, 0.025, 0.02, 0.018]},
+        "M7": {"mean": [1.35, 0.82, 0.62, 0.46, 0.35, 0.29, 0.26, 0.23], "std": [0.18, 0.10, 0.07, 0.05, 0.035, 0.03, 0.025, 0.02]},
+        "M10": {"mean": [1.48, 0.90, 0.68, 0.52, 0.40, 0.33, 0.29, 0.26], "std": [0.20, 0.11, 0.08, 0.06, 0.04, 0.035, 0.03, 0.025]},
+        "M15": {"mean": [1.60, 1.00, 0.76, 0.58, 0.44, 0.37, 0.33, 0.30], "std": [0.22, 0.12, 0.09, 0.065, 0.045, 0.038, 0.033, 0.028]},
+        "M20": {"mean": [1.72, 1.08, 0.82, 0.63, 0.48, 0.41, 0.36, 0.33], "std": [0.24, 0.13, 0.10, 0.07, 0.05, 0.042, 0.036, 0.030]}
+      }
+    },
+    "source": "Figure 6 (simulation results, γ=2, pixel-calibrated)",
+    "confidence": "Coverage values ±0.02, widths ±0.05"
+  }
+}

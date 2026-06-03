@@ -1,0 +1,49 @@
+{
+  "date": "2026-05-08",
+  "paper": {
+    "title": "Scaling LLM Test-Time Compute Optimally can be More Effective than Scaling Model Parameters",
+    "venue": "ICLR 2025",
+    "pdf_file": "paper.pdf"
+  },
+  "figures": [
+    {
+      "index": 1,
+      "original_ref": "Figure 1 (top-right)",
+      "chart_type": "grouped_bar",
+      "description": "Revisions: test-time vs pretraining compute FLOPs匹配评估",
+      "files": {
+        "original": "1.1_原图.png",
+        "reproduced": "1.2_生成图.png",
+        "comparison": "1.3_对比图.png"
+      },
+      "data_source": "Figure 1 标注百分比",
+      "quality_notes": "数据精确，颜色匹配"
+    },
+    {
+      "index": 2,
+      "original_ref": "Figure 1 (bottom-right)",
+      "chart_type": "grouped_bar",
+      "description": "PRM Search: test-time vs pretraining compute FLOPs匹配评估",
+      "files": {
+        "original": "2.1_原图.png",
+        "reproduced": "2.2_生成图.png",
+        "comparison": "2.3_对比图.png"
+      },
+      "data_source": "Figure 1 标注百分比",
+      "quality_notes": "数据精确，颜色匹配"
+    },
+    {
+      "index": 3,
+      "original_ref": "Figure 4",
+      "chart_type": "line",
+      "description": "Compute Optimal Search: 不同搜索策略的scaling curves",
+      "files": {
+        "original": "3.1_原图.png",
+        "reproduced": "3.2_生成图.png",
+        "comparison": "3.3_对比图.png"
+      },
+      "data_source": "Figure 4 像素读取 ±1%",
+      "quality_notes": "趋势和相对位置准确"
+    }
+  ]
+}

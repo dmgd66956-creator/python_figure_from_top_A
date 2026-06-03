@@ -4,7 +4,11 @@ Python 复现 AI 顶会论文经典实验图，配套小红书"跟着顶刊学�
 
 每期目录下：
 - `reproduce.py` — 单文件 matplotlib 复现脚本，可直接运行
+- `extracted_data.json` — 从论文像素校准/表格抄录得到的全部数值数据（reproduce.py 读这个跑）
+- `manifest.json` — 元数据清单（论文标题 / 来源 / 3 张图说明）
 - `xhs_publish/` — 小红书发布素材：封面 + 3 张原图vs复现对比 + 3 张代码截图 + 色卡
+
+> ep04/ep05 是早期复现，`extracted_data.json` 当时还没引入规范，缺失。
 
 ## 期数索引
 

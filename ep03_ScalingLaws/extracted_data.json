@@ -1,0 +1,68 @@
+{
+  "paper": {
+    "title": "Scaling Laws for Pre-training Agents and World Models",
+    "venue": "ICML 2025",
+    "authors": "Pearce et al.",
+    "summary": "本文首次系统研究了智能体预训练中的缩放定律，发现世界模型(WM)和行为克隆(BC)任务中均存在类似LLM的幂律关系。通过在大规模视频游戏数据集上训练不同规模模型，揭示了WM偏向扩大模型、BC偏向扩大数据的关键差异，并成功用894M参数模型验证了外推预测能力。"
+  },
+  "figure1": {
+    "original_ref": "Figure 5",
+    "chart_type": "log_log_scaling",
+    "description": "WM-Token-256 scaling: parametric fit + frontier fit for optimal N and D",
+    "structure": {
+      "subplots": 3, "layout": "1x3",
+      "panel1": {"title": "", "x": "FLOPs", "y": "Loss", "scale": "log-log"},
+      "panel2": {"title": "Optimal parameters", "x": "FLOPs", "y": "Optimal parameters", "scale": "log-log"},
+      "panel3": {"title": "Optimal tokens", "x": "FLOPs", "y": "Optimal tokens", "scale": "log-log"}
+    },
+    "data": {
+      "models": {"15M": 15e6, "27M": 27e6, "52M": 52e6, "110M": 110e6, "206M": 206e6},
+      "frontier_fit": {"a": 0.49, "b": 0.51},
+      "legend_panel1": ["15M params", "27M params", "52M params", "110M params", "206M params", "Parametric fit"],
+      "legend_panel2": ["Best model given FLOPs", "Power law, a=0.49"],
+      "legend_panel3": ["Best model given FLOPs", "Power law, b=0.51"]
+    },
+    "source": "Figure 5 + Table 1",
+    "confidence": "Coefficients exact from Table 1; training curves pixel-calibrated"
+  },
+  "figure2": {
+    "original_ref": "Figure 9",
+    "chart_type": "log_log_extrapolation",
+    "description": "WM-Token-256 extrapolation test with 894M parameter model",
+    "structure": {
+      "subplots": 3, "layout": "1x3",
+      "panel1": {"title": "", "x": "FLOPs", "y": "Loss", "scale": "log-log"},
+      "panel2": {"title": "Optimal parameters", "x": "FLOPs", "y": "Optimal parameters", "scale": "log-log"},
+      "panel3": {"title": "Optimal tokens", "x": "FLOPs", "y": "Optimal tokens", "scale": "log-log"}
+    },
+    "data": {
+      "models": {"15M": 15e6, "27M": 27e6, "52M": 52e6, "110M": 110e6, "206M": 206e6, "894M": 894e6},
+      "loss_fit": {"formula": "L = 0.1 * C^(-0.07)", "c0": 0.1, "c": 0.07},
+      "frontier_fit": {"a": 0.49, "b": 0.51},
+      "extrapolation_894M": "marked with 'x'"
+    },
+    "source": "Figure 9 + Table 1 + Section 4.3",
+    "confidence": "Coefficients exact; 894M point pixel-calibrated"
+  },
+  "figure3": {
+    "original_ref": "Figure 10",
+    "chart_type": "log_log_training_curves",
+    "description": "Character modeling: Dense vs Sparse vs Super-classed loss",
+    "structure": {
+      "subplots": 3, "layout": "1x3",
+      "panel1": {"title": "Dense loss", "subtitle": "N_opt∝C^0.63, D_opt∝C^0.37"},
+      "panel2": {"title": "Sparse loss", "subtitle": "N_opt∝C^0.50, D_opt∝C^0.50"},
+      "panel3": {"title": "Sparse loss, super-classed", "subtitle": "N_opt∝C^0.15, D_opt∝C^0.85"}
+    },
+    "data": {
+      "models": {"3.81k": 3810, "8.75k": 8750, "0.06M": 60000, "0.11M": 110000, "0.28M": 280000, "1.08M": 1080000, "4.23M": 4230000, "16.75M": 16750000},
+      "scaling_coefficients": {
+        "dense": {"a": 0.63, "b": 0.37},
+        "sparse": {"a": 0.50, "b": 0.50},
+        "super_classed": {"a": 0.15, "b": 0.85}
+      }
+    },
+    "source": "Figure 10 + Section 5.1",
+    "confidence": "Coefficients exact from figure annotations"
+  }
+}

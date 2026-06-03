@@ -1,0 +1,58 @@
+{
+  "date": "2026-05-25",
+  "paper": {
+    "title": "Tree of Thoughts: Deliberate Problem Solving with Large Language Models",
+    "venue": "NeurIPS 2023",
+    "pdf_path": "paper.pdf",
+    "summary": "本文提出 Tree of Thoughts (ToT)，把语言模型推理建模为对中间思维树的搜索：每一步生成多个候选思维并用模型自评估优劣，再用 BFS/DFS 进行探索与回溯。创新之处在于把链式 CoT 的单路径生成升级为可分支、可前瞻、可回溯的深思熟虑推理。在 Game of 24 上 ToT (b=5) 达成 74% 成功率，相较 CoT 的 4% 显著提升，同时在 Creative Writing 与 Mini Crosswords 上也优于 IO/CoT 基线。"
+  },
+  "figures": [
+    {
+      "index": 1,
+      "original_ref": "Figure 3a",
+      "chart_type": "line",
+      "description": "Game of 24 — Success rate vs nodes visited (IO/CoT best-of-k vs ToT b=1..5)",
+      "files": {
+        "original": "1.1_原图.png",
+        "reproduced": "1.2_生成图.png",
+        "comparison": "1.3_对比图.png"
+      },
+      "data_source": "Pixel calibration on Figure 3a; endpoints anchored to Table 2"
+    },
+    {
+      "index": 2,
+      "original_ref": "Figure 3b",
+      "chart_type": "bar",
+      "description": "Game of 24 — Samples failed at each step (CoT vs ToT b=5)",
+      "files": {
+        "original": "2.1_原图.png",
+        "reproduced": "2.2_生成图.png",
+        "comparison": "2.3_对比图.png"
+      },
+      "data_source": "Pixel calibration on Figure 3b; ToT Correct = 74% anchor"
+    },
+    {
+      "index": 3,
+      "original_ref": "Figure 5b",
+      "chart_type": "bar",
+      "description": "Creative Writing — Human pairwise coherency comparison (CoT>ToT / Similar / ToT>CoT)",
+      "files": {
+        "original": "3.1_原图.png",
+        "reproduced": "3.2_生成图.png",
+        "comparison": "3.3_对比图.png"
+      },
+      "data_source": "Direct readout: 21 / 38 / 41"
+    }
+  ],
+  "files": {
+    "code": "reproduce.py",
+    "data": "extracted_data.json",
+    "colors": "extracted_colors.json",
+    "paper": "paper.pdf"
+  },
+  "xhs_template": {
+    "cover": "B",
+    "images": "F",
+    "hashtag": "H"
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "date": "2026-05-23",
+  "paper": {
+    "title": "Training Large Language Models to Reason in a Continuous Latent Space (Coconut)",
+    "venue": "ICLR 2025",
+    "pdf_path": "paper.pdf"
+  },
+  "figures": [
+    {
+      "index": 1,
+      "original_ref": "Figure 3",
+      "chart_type": "bar",
+      "description": "Final answer accuracy + reasoning process composition on ProsQA",
+      "files": {
+        "original": "1.1_原图.png",
+        "reproduced": "1.2_生成图.png",
+        "comparison": "1.3_对比图.png"
+      },
+      "data_source": "Pixel calibration on Figure 3 (~±3%)"
+    },
+    {
+      "index": 2,
+      "original_ref": "Figure 7",
+      "chart_type": "line",
+      "description": "Predicted value vs node height (first/second thoughts)",
+      "files": {
+        "original": "2.1_原图.png",
+        "reproduced": "2.2_生成图.png",
+        "comparison": "2.3_对比图.png"
+      },
+      "data_source": "Pixel calibration (~±0.03)"
+    },
+    {
+      "index": 3,
+      "original_ref": "Figure 8",
+      "chart_type": "line",
+      "description": "Reasoning efficiency on GSM8k + Coconut accuracy vs c",
+      "files": {
+        "original": "3.1_原图.png",
+        "reproduced": "3.2_生成图.png",
+        "comparison": "3.3_对比图.png"
+      },
+      "data_source": "Pixel calibration; Table 1 anchor for Coconut 34.1%"
+    }
+  ],
+  "files": {
+    "code": "reproduce.py",
+    "data": "extracted_data.json",
+    "colors": "extracted_colors.json",
+    "paper": "paper.pdf"
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "paper": {
+    "title": "SaaS-Bench: Can Computer-Use Agents Leverage Real-World SaaS to Solve Professional Workflows?",
+    "venue": "arXiv 2605.15777",
+    "date": "2026-05-15",
+    "topic": "LLM Agent Benchmark"
+  },
+  "reproduction_date": "2026-05-21",
+  "figures": [
+    {
+      "id": 1,
+      "original_ref": "Figure 1",
+      "chart_type": "horizontal_bar",
+      "description": "Leaderboard: overall checkpoint scores for 7 frontier models",
+      "files": {
+        "original": "1.1_原图.png",
+        "reproduced": "1.2_生成图.png",
+        "comparison": "1.3_对比图.png"
+      },
+      "data_source": "Table 2 + Figure 1 annotations",
+      "index": 1
+    },
+    {
+      "id": 2,
+      "original_ref": "Figure 6",
+      "chart_type": "grouped_stacked_bar",
+      "description": "Pass@k scores (k=1,2,3) for 4 models across 3 splits",
+      "files": {
+        "original": "2.1_原图.png",
+        "reproduced": "2.2_生成图.png",
+        "comparison": "2.3_对比图.png"
+      },
+      "data_source": "Figure 6 annotations (exact values labeled)",
+      "index": 2
+    },
+    {
+      "id": 3,
+      "original_ref": "Figure 9",
+      "chart_type": "horizontal_stacked_bar_100pct",
+      "description": "Per-domain error composition for Opus 4.6",
+      "files": {
+        "original": "3.1_原图.png",
+        "reproduced": "3.2_生成图.png",
+        "comparison": "3.3_对比图.png"
+      },
+      "data_source": "Figure 9 annotations (exact percentages labeled)",
+      "index": 3
+    }
+  ],
+  "files": {
+    "code": "reproduce.py",
+    "data": "extracted_data.json",
+    "colors": "extracted_colors.json",
+    "paper": "paper.pdf"
+  },
+  "date": "2026-05-21"
+}

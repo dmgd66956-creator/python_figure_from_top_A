@@ -1,0 +1,181 @@
+{
+  "paper": {
+    "title": "Forgetting That Sticks: Quantization-Permanent Unlearning via Circuit Attribution",
+    "venue": "arXiv 2026.05 (cs.LG, 14 May 2026)",
+    "authors": "Saisab Sadhu, Pratinav Seth, Vinay Kumar Sankarapu (Lexsi Labs)",
+    "arxiv_id": "2605.15138",
+    "url": "https://arxiv.org/abs/2605.15138",
+    "summary": "本文提出 MANSU 三阶段遗忘方法：用 EAP-IG 归因定位 Llama-3.1-8B 中编码遗忘知识的 5 层 MLP 子电路，仅在该电路上做保留集 Fisher 零空间投影更新，最后施加幅值地板把每次更新抬过 NF4 量化宽度。创新在于首次把可解释性的电路定位与量化感知优化结合并提出 CAD 指标区分结构擦除与行为抑制。WMDP-bio 上 MANSU 遗忘准确率 0.430、PTQ gap -0.040 同时保留 MMLU 0.573，CAD 达 1.143 远超梯度基线。"
+  },
+
+  "figure1": {
+    "original_ref": "Figure 1 (a) Global GA panel",
+    "chart_type": "histogram",
+    "description": "Per-parameter update magnitude histogram for Global Gradient Ascent on Llama-3.1-8B / WMDP-bio. All updates lie far below the NF4 quantization bin width delta_i = 8.4e-4 — 0.0% of parameters cross the threshold and survive 4-bit quantization.",
+
+    "structure": {
+      "subplots": 1,
+      "layout": "single panel",
+      "x_axis": {"meaning": "log10 |delta_w|", "type": "continuous", "range": [-8, 0]},
+      "y_axis": {"meaning": "Density", "type": "continuous", "range": [0, "auto"]},
+      "bar_color": "#D87070",
+      "shaded_region": {"x_range": [-3.077, 0], "fill": "#FCEEEE", "label": "0.0% >= delta_i"},
+      "vertical_line": {"x": -3.077, "style": "dashed", "color": "black", "label": "delta_i"},
+      "spines": {"left": true, "bottom": true, "top": true, "right": true},
+      "grid": false
+    },
+
+    "data": {
+      "method": "Global GA",
+      "delta_i_log10": -3.077,
+      "delta_i_value": 8.4e-4,
+      "fraction_above_delta": 0.0,
+      "distribution_log_mean": -4.85,
+      "distribution_log_std": 0.18,
+      "distribution_log_min": -5.6,
+      "distribution_log_max": -4.6,
+      "n_samples": 50000,
+      "rms_value_log10": -5.92,
+      "rms_value_linear": 1.21e-6
+    },
+
+    "source": "Figure 1 (a) shape from histogram + Table 15 RMS=1.21e-6 (log10 = -5.92), Definition 1 + Section D.3 delta_i = 8.4e-4",
+    "confidence": "shape approximate via lognormal model; delta_i and 0.0% label exact from Figure 1 annotation"
+  },
+
+  "figure2": {
+    "original_ref": "Figure 1 (c) MANSU panel",
+    "chart_type": "histogram",
+    "description": "MANSU per-parameter update magnitudes on Llama-3.1-8B / WMDP-bio. The magnitude floor clamps all updates at or above delta_i, so >=95% of circuit-restricted updates cross the NF4 bin boundary and survive quantization. Inset shows zoom around -3.1 to visualize the floor.",
+
+    "structure": {
+      "subplots": 1,
+      "layout": "main panel + zoom inset (top-left)",
+      "x_axis": {"meaning": "log10 |delta_w|", "type": "continuous", "range": [-8, 0]},
+      "y_axis": {"meaning": "Density", "type": "continuous", "range": [0, "auto"]},
+      "bar_color": "#1F77B4",
+      "shaded_region": {"x_range": [-3.077, 0], "fill": "#EAF2FA", "label": ">= 95% >= delta_i"},
+      "vertical_line": {"x": -3.077, "style": "dashed", "color": "black", "label": "delta_i"},
+      "inset": {
+        "title": "Zoom",
+        "x_range": [-3.4, -2.7],
+        "shows": "narrow band of updates clamped just above delta_i, with right tail extending to -2.8"
+      },
+      "spines": {"left": true, "bottom": true, "top": true, "right": true},
+      "grid": false
+    },
+
+    "data": {
+      "method": "MANSU",
+      "delta_i_log10": -3.077,
+      "delta_i_value": 8.4e-4,
+      "fraction_above_delta": 0.95,
+      "distribution_log_mean": -3.05,
+      "distribution_log_std": 0.08,
+      "distribution_log_min": -3.10,
+      "distribution_log_max": -2.78,
+      "n_samples": 1600,
+      "circuit_layers": [30, 14, 31, 19, 29],
+      "circuit_fraction": 0.032
+    },
+
+    "source": "Figure 1 (c) main panel + zoom inset shape + Lemma 1 (floor clamps updates above delta_i)",
+    "confidence": "shape approximate via clamped lognormal; >=95% and delta_i exact from Figure 1 annotation"
+  },
+
+  "figure3": {
+    "original_ref": "Figure 3 (three-panel scatter)",
+    "chart_type": "scatter",
+    "description": "Four-property scorecard showing PTQ gap (a), MMLU loss (b), and AS-NC structural localization (c) versus forget delta across 24 method-dataset cells. Solid markers pass all four thresholds; hollow markers fail at least one. MANSU (blue diamond) is the only method whose markers all sit in the green pass region of every panel.",
+
+    "structure": {
+      "subplots": 3,
+      "layout": "1x3 horizontal",
+      "x_axis": {"meaning": "Forget delta", "type": "continuous", "range": [0.0, 0.65]},
+      "y_axes": [
+        {"panel": "a", "meaning": "PTQ gap (delta_PTQ)",       "range": [-0.045, 0.07], "title": "Q: quantization permanence", "regions": {"top_red": [0.0, 0.07], "bottom_green": [-0.045, 0.0]}, "region_labels": ["quantization reverses", "quantization amplifies"]},
+        {"panel": "b", "meaning": "MMLU loss (baseline - actual)", "range": [-0.05, 0.5], "title": "R: retain utility",       "regions": {"top_red": [0.15, 0.5], "bottom_green": [-0.05, 0.15]}, "region_labels": ["utility crashed", "utility preserved"]},
+        {"panel": "c", "meaning": "AS-NC (retain spillover)",   "range": [0.0, 1.4],     "title": "S: structural localization", "regions": {"top_red": [0.30, 1.4], "bottom_green": [0.0, 0.30]}, "region_labels": ["spillover (retain damage)", "localized (no spillover)"]}
+      ],
+      "method_color_marker": [
+        {"name": "Global GA",   "color": "#D62728", "marker": "o"},
+        {"name": "Surgical GA", "color": "#FF7F0E", "marker": "s"},
+        {"name": "NPO",         "color": "#FFD93D", "marker": "^"},
+        {"name": "SimNPO",      "color": "#9C7AC9", "marker": "v"},
+        {"name": "GU+SimNPO",   "color": "#7F7F7F", "marker": "P"},
+        {"name": "MANSU",       "color": "#1F77B4", "marker": "D"}
+      ],
+      "dataset_shape_legend": ["WMDP-bio (circle)", "WMDP-chem (square)", "WMDP-cyber (triangle)", "MUSE (diamond)"],
+      "fill_meaning": "solid = passes all 4 (F+Q+R+S); hollow = fails at least one",
+      "spines": {"left": true, "bottom": true, "top": true, "right": true},
+      "grid": false
+    },
+
+    "data": {
+      "panel_a_PTQ_gap": [
+        {"method": "Global GA",   "dataset": "WMDP-bio",   "x": 0.50, "y":  0.050, "fill": "hollow"},
+        {"method": "Global GA",   "dataset": "WMDP-chem",  "x": 0.27, "y": -0.020, "fill": "hollow"},
+        {"method": "Global GA",   "dataset": "WMDP-cyber", "x": 0.41, "y":  0.013, "fill": "hollow"},
+        {"method": "Surgical GA", "dataset": "WMDP-bio",   "x": 0.22, "y":  0.027, "fill": "hollow"},
+        {"method": "Surgical GA", "dataset": "WMDP-chem",  "x": 0.34, "y": -0.003, "fill": "hollow"},
+        {"method": "Surgical GA", "dataset": "WMDP-cyber", "x": 0.44, "y":  0.007, "fill": "hollow"},
+        {"method": "NPO",         "dataset": "WMDP-bio",   "x": 0.32, "y": -0.020, "fill": "hollow"},
+        {"method": "NPO",         "dataset": "WMDP-chem",  "x": 0.41, "y": -0.027, "fill": "hollow"},
+        {"method": "NPO",         "dataset": "WMDP-cyber", "x": 0.42, "y":  0.003, "fill": "hollow"},
+        {"method": "NPO",         "dataset": "MUSE",       "x": 0.74, "y":  0.002, "fill": "hollow"},
+        {"method": "SimNPO",      "dataset": "WMDP-bio",   "x": 0.51, "y":  0.005, "fill": "hollow"},
+        {"method": "SimNPO",      "dataset": "WMDP-chem",  "x": 0.55, "y":  0.000, "fill": "hollow"},
+        {"method": "SimNPO",      "dataset": "WMDP-cyber", "x": 0.43, "y": -0.013, "fill": "hollow"},
+        {"method": "GU+SimNPO",   "dataset": "WMDP-bio",   "x": 0.55, "y":  0.000, "fill": "hollow"},
+        {"method": "GU+SimNPO",   "dataset": "WMDP-chem",  "x": 0.49, "y":  0.000, "fill": "hollow"},
+        {"method": "GU+SimNPO",   "dataset": "WMDP-cyber", "x": 0.46, "y":  0.000, "fill": "hollow"},
+        {"method": "MANSU",       "dataset": "WMDP-bio",   "x": 0.34, "y": -0.040, "fill": "solid"},
+        {"method": "MANSU",       "dataset": "WMDP-chem",  "x": 0.42, "y": -0.027, "fill": "solid"},
+        {"method": "MANSU",       "dataset": "WMDP-cyber", "x": 0.45, "y": -0.010, "fill": "solid"}
+      ],
+      "panel_b_MMLU_loss": [
+        {"method": "Global GA",   "dataset": "WMDP-bio",   "x": 0.50, "y": 0.37, "fill": "hollow"},
+        {"method": "Global GA",   "dataset": "WMDP-chem",  "x": 0.27, "y": 0.05, "fill": "hollow"},
+        {"method": "Global GA",   "dataset": "WMDP-cyber", "x": 0.41, "y": 0.06, "fill": "hollow"},
+        {"method": "Surgical GA", "dataset": "WMDP-bio",   "x": 0.22, "y": 0.07, "fill": "hollow"},
+        {"method": "Surgical GA", "dataset": "WMDP-chem",  "x": 0.34, "y": 0.07, "fill": "hollow"},
+        {"method": "Surgical GA", "dataset": "WMDP-cyber", "x": 0.44, "y": 0.07, "fill": "hollow"},
+        {"method": "NPO",         "dataset": "WMDP-bio",   "x": 0.32, "y": 0.04, "fill": "hollow"},
+        {"method": "NPO",         "dataset": "WMDP-chem",  "x": 0.41, "y": 0.07, "fill": "hollow"},
+        {"method": "NPO",         "dataset": "WMDP-cyber", "x": 0.42, "y": 0.06, "fill": "hollow"},
+        {"method": "NPO",         "dataset": "MUSE",       "x": 0.74, "y": 0.04, "fill": "hollow"},
+        {"method": "SimNPO",      "dataset": "WMDP-bio",   "x": 0.51, "y": 0.41, "fill": "hollow"},
+        {"method": "SimNPO",      "dataset": "WMDP-chem",  "x": 0.55, "y": 0.41, "fill": "hollow"},
+        {"method": "SimNPO",      "dataset": "WMDP-cyber", "x": 0.43, "y": 0.10, "fill": "hollow"},
+        {"method": "GU+SimNPO",   "dataset": "WMDP-bio",   "x": 0.55, "y": 0.40, "fill": "hollow"},
+        {"method": "GU+SimNPO",   "dataset": "WMDP-chem",  "x": 0.49, "y": 0.37, "fill": "hollow"},
+        {"method": "GU+SimNPO",   "dataset": "WMDP-cyber", "x": 0.46, "y": 0.31, "fill": "hollow"},
+        {"method": "MANSU",       "dataset": "WMDP-bio",   "x": 0.34, "y": 0.03, "fill": "solid"},
+        {"method": "MANSU",       "dataset": "WMDP-chem",  "x": 0.42, "y": 0.02, "fill": "solid"},
+        {"method": "MANSU",       "dataset": "WMDP-cyber", "x": 0.45, "y": 0.02, "fill": "solid"}
+      ],
+      "panel_c_AS_NC": [
+        {"method": "Global GA",   "dataset": "WMDP-bio",   "x": 0.50, "y": 0.31, "fill": "hollow"},
+        {"method": "Global GA",   "dataset": "WMDP-chem",  "x": 0.27, "y": 0.28, "fill": "hollow"},
+        {"method": "Global GA",   "dataset": "WMDP-cyber", "x": 0.41, "y": 0.36, "fill": "hollow"},
+        {"method": "Surgical GA", "dataset": "WMDP-bio",   "x": 0.22, "y": 0.51, "fill": "hollow"},
+        {"method": "Surgical GA", "dataset": "WMDP-chem",  "x": 0.34, "y": 0.57, "fill": "hollow"},
+        {"method": "Surgical GA", "dataset": "WMDP-cyber", "x": 0.44, "y": 0.34, "fill": "hollow"},
+        {"method": "NPO",         "dataset": "WMDP-bio",   "x": 0.32, "y": 0.87, "fill": "hollow"},
+        {"method": "NPO",         "dataset": "WMDP-chem",  "x": 0.41, "y": 0.88, "fill": "hollow"},
+        {"method": "NPO",         "dataset": "WMDP-cyber", "x": 0.42, "y": 0.50, "fill": "hollow"},
+        {"method": "SimNPO",      "dataset": "WMDP-bio",   "x": 0.51, "y": 1.10, "fill": "hollow"},
+        {"method": "SimNPO",      "dataset": "WMDP-chem",  "x": 0.55, "y": 1.10, "fill": "hollow"},
+        {"method": "SimNPO",      "dataset": "WMDP-cyber", "x": 0.43, "y": 1.03, "fill": "hollow"},
+        {"method": "GU+SimNPO",   "dataset": "WMDP-bio",   "x": 0.55, "y": 0.82, "fill": "hollow"},
+        {"method": "GU+SimNPO",   "dataset": "WMDP-chem",  "x": 0.49, "y": 0.83, "fill": "hollow"},
+        {"method": "GU+SimNPO",   "dataset": "WMDP-cyber", "x": 0.46, "y": 0.98, "fill": "hollow"},
+        {"method": "MANSU",       "dataset": "WMDP-bio",   "x": 0.34, "y": 0.14, "fill": "solid"},
+        {"method": "MANSU",       "dataset": "WMDP-chem",  "x": 0.42, "y": 0.14, "fill": "solid"},
+        {"method": "MANSU",       "dataset": "WMDP-cyber", "x": 0.45, "y": 0.14, "fill": "solid"}
+      ]
+    },
+    "source": "Figure 3 (page 8) panels (a)(b)(c) coordinates approximated from scatter; values cross-checked with Table 2 (BF16, NF4, delta_PTQ, MMLU) and Table 3 (AS-NC).",
+    "confidence": "x within +-0.03; y within +-0.02 for panel a, +-0.05 panel b, +-0.10 panel c"
+  }
+}

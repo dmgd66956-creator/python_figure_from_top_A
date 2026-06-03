@@ -1,0 +1,50 @@
+{
+  "date": "2026-05-19",
+  "paper": {
+    "title": "GroupMemBench: Benchmarking LLM Agent Memory in Multi-Party Conversations",
+    "venue": "arXiv 2026.05 (NeurIPS 2026 submission)",
+    "arxiv_id": "2605.14498",
+    "pdf_path": "paper.pdf"
+  },
+  "figures": [
+    {
+      "index": 1,
+      "original_ref": "Figure 3",
+      "chart_type": "grouped_bar",
+      "description": "G-Eval scores across six dimensions (Baseline / Ours / Real-world)",
+      "files": {
+        "original": "1.1_原图.png",
+        "reproduced": "1.2_生成图.png",
+        "comparison": "1.3_对比图.png"
+      },
+      "data_source": "Figure 3 视觉读取",
+      "quality_notes": "三色 grouped bar with error bars; ylim 已留 0.3 padding"
+    },
+    {
+      "index": 2,
+      "original_ref": "Figure 6",
+      "chart_type": "annotated_heatmap",
+      "description": "P(correct | gold retrieved) per (baseline, question type) for Technology and Finance",
+      "files": {
+        "original": "2.1_原图.png",
+        "reproduced": "2.2_生成图.png",
+        "comparison": "2.3_对比图.png"
+      },
+      "data_source": "Figure 6 单元格内标注直接抄录（精确）",
+      "quality_notes": "自定义 muted PiYG cmap 匹配原图颜色，整数标注 + 共享 colorbar"
+    },
+    {
+      "index": 3,
+      "original_ref": "Figure 5 (Left)",
+      "chart_type": "stacked_bar",
+      "description": "Failure-mode decomposition: correct / reasoning fail / retrieval fail",
+      "files": {
+        "original": "3.1_原图.png",
+        "reproduced": "3.2_生成图.png",
+        "comparison": "3.3_对比图.png"
+      },
+      "data_source": "Figure 5 (Left) 段内整数标注直接抄录",
+      "quality_notes": "horizontal stacked bar 三色分段，白色分隔线，xlim 已留 5 padding"
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "date": "2026-05-22",
+  "paper": {
+    "title": "AgentAtlas: A Comprehensive Benchmark for Tool-Augmented LLM Agents",
+    "venue": "arXiv 2026.05",
+    "pdf_path": "paper.pdf"
+  },
+  "figures": [
+    {
+      "index": 1,
+      "original_ref": "Figure (Overall pass@k)",
+      "chart_type": "multi_series_line",
+      "description": "Overall pass@k performance for 8 models",
+      "files": {
+        "original": "1.1_原图.png",
+        "reproduced": "1.2_生成图.png",
+        "comparison": "1.3_对比图.png"
+      },
+      "data_source": "Figure pixel calibration ±2%"
+    },
+    {
+      "index": 2,
+      "original_ref": "Figure (Benchmark coverage)",
+      "chart_type": "horizontal_stacked_bar",
+      "description": "Benchmark coverage across 6 evaluation dimensions",
+      "files": {
+        "original": "2.1_原图.png",
+        "reproduced": "2.2_生成图.png",
+        "comparison": "2.3_对比图.png"
+      },
+      "data_source": "Figure annotations (exact)"
+    },
+    {
+      "index": 3,
+      "original_ref": "Figure (CCBench scatter)",
+      "chart_type": "scatter_with_lines",
+      "description": "CCBench success rate vs cost for 8 models",
+      "files": {
+        "original": "3.1_原图.png",
+        "reproduced": "3.2_生成图.png",
+        "comparison": "3.3_对比图.png"
+      },
+      "data_source": "Figure pixel calibration ±3%"
+    }
+  ],
+  "files": {
+    "code": "reproduce.py",
+    "data": "extracted_data.json",
+    "colors": "extracted_colors.json",
+    "paper": "paper.pdf"
+  }
+}

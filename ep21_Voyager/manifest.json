@@ -1,0 +1,59 @@
+{
+  "date": "2026-05-30",
+  "paper": {
+    "title": "Voyager: An Open-Ended Embodied Agent with Large Language Models",
+    "venue": "NeurIPS 2024 (Wang et al., NVIDIA / Caltech / UT Austin)",
+    "pdf_path": "paper.pdf",
+    "summary": "本文提出 Voyager —— 首个由 LLM 驱动的终身学习智能体，在 Minecraft 中通过自动课程、技能库与可执行代码迭代式自我提升。创新点是用 GPT-4 将环境反馈+自我验证反馈循环编码为可复用 Python 技能，免微调地积累长期经验。结果：Voyager 收集独特物品比 SOTA 多 3.3 倍，关键里程碑速度快 15.3 倍，并能零样本迁移到全新 Minecraft 任务。"
+  },
+  "figures": [
+    {
+      "index": 1,
+      "original_ref": "Figure 1",
+      "chart_type": "multi_line",
+      "description": "Voyager vs ReAct/Reflexion/AutoGPT 累积发现物品数曲线 + 关键里程碑标注",
+      "files": {
+        "original": "1.1_原图.png",
+        "reproduced": "1.2_生成图.png",
+        "comparison": "1.3_对比图.png"
+      },
+      "data_source": "Figure 1 像素读取 4 系列轨迹 (±2 items)"
+    },
+    {
+      "index": 2,
+      "original_ref": "Figure 8",
+      "chart_type": "multi_line",
+      "description": "1×2 阶梯曲线：合成金剑 / 收集岩浆桶 — Voyager vs AutoGPT 4 变体",
+      "files": {
+        "original": "2.1_原图.png",
+        "reproduced": "2.2_生成图.png",
+        "comparison": "2.3_对比图.png"
+      },
+      "data_source": "Figure 8 阶梯转折点像素读取 (±1 iteration)"
+    },
+    {
+      "index": 3,
+      "original_ref": "Figure 9",
+      "chart_type": "multi_line",
+      "description": "1×2 消融：课程&技能库 / 反馈类型对累积物品数影响",
+      "files": {
+        "original": "3.1_原图.png",
+        "reproduced": "3.2_生成图.png",
+        "comparison": "3.3_对比图.png"
+      },
+      "data_source": "Figure 9 主曲线像素读取 (±2 items)"
+    }
+  ],
+  "files": {
+    "code": "reproduce.py",
+    "data": "extracted_data.json",
+    "colors": "extracted_colors.json",
+    "paper": "paper.pdf"
+  },
+  "xhs_template": {
+    "cover": "K",
+    "images": "A",
+    "hashtag": "B",
+    "cover_palette_bg": "#F5E8D8"
+  }
+}

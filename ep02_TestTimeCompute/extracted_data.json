@@ -1,0 +1,96 @@
+{
+  "paper": {
+    "title": "Scaling LLM Test-Time Compute Optimally can be More Effective than Scaling Model Parameters",
+    "venue": "ICLR 2025",
+    "authors": "Charlie Snell, Jaehoon Lee, Kelvin Xu, Aviral Kumar (Google DeepMind)",
+    "summary": "本文系统研究了LLM推理时计算量的最优分配策略。通过对比搜索（PRM验证器）和自我修正（迭代修订）两种机制，发现按题目难度自适应分配推理计算量，可比Best-of-N基线提升4倍效率，且在中等难度问题上，小模型+推理计算可超越14倍大的模型。"
+  },
+
+  "figure1": {
+    "original_ref": "Figure 1 (top-right)",
+    "chart_type": "grouped_bar",
+    "description": "Revisions: 比较test-time compute与pretraining compute在FLOPs匹配评估中的相对改进",
+
+    "visual_spec": {
+      "L0_canvas": {"figsize": [5, 4], "background": "white"},
+      "L1_frame": {"spines": {"left": true, "bottom": true, "top": false, "right": false}, "spine_width": 0.5, "tick_direction": "out"},
+      "L2_grid": {"visible": true, "axis": "y", "color": "#CCCCCC", "width": 0.3, "style": "-", "behind": true},
+      "L3_colors": {"Easy Questions": "#5B9E5B", "Medium Questions": "#4878B8", "Hard Questions": "#D88858"},
+      "L4_data": {"type": "grouped_bar", "groups": 3, "bars_per_group": 3, "bar_width": 0.25},
+      "L5_overlay": {"zero_line": true, "zero_line_color": "black", "zero_line_width": 0.8},
+      "L6_annotation": {"value_labels": true, "label_position": "above_bar", "format": "+.1f%"},
+      "L7_text": {"title": "Comparing Test-time and Pretraining Compute\nin a FLOPs Matched Evauation", "xlabel": "Ratio of Inference Tokens to Pretraining Tokens", "ylabel": "Relative Improvement in Accuracy\nFrom Test-time Compute (%)", "fs_title": 9, "fs_axis_label": 8, "fs_tick_label": 8, "fs_annotation": 7, "fs_legend": 7}
+    },
+
+    "data": {
+      "categories": ["<<1", "~=1", ">>1"],
+      "series": ["Easy Questions", "Medium Questions", "Hard Questions"],
+      "values": {
+        "Easy Questions": [21.6, 16.7, 5.4],
+        "Medium Questions": [27.8, 3.5, -24.3],
+        "Hard Questions": [11.8, -11.9, -37.2]
+      }
+    },
+    "source": "Figure 1 top-right 标注（精确）",
+    "confidence": "精确"
+  },
+
+  "figure2": {
+    "original_ref": "Figure 1 (bottom-right)",
+    "chart_type": "grouped_bar",
+    "description": "PRM Search: 比较test-time compute与pretraining compute在FLOPs匹配评估中的相对改进",
+
+    "visual_spec": {
+      "L0_canvas": {"figsize": [5, 4], "background": "white"},
+      "L1_frame": {"spines": {"left": true, "bottom": true, "top": false, "right": false}, "spine_width": 0.5, "tick_direction": "out"},
+      "L2_grid": {"visible": true, "axis": "y", "color": "#CCCCCC", "width": 0.3, "style": "-", "behind": true},
+      "L3_colors": {"Easy Questions": "#5B9E5B", "Medium Questions": "#4878B8", "Hard Questions": "#D88858"},
+      "L4_data": {"type": "grouped_bar", "groups": 3, "bars_per_group": 3, "bar_width": 0.25},
+      "L5_overlay": {"zero_line": true, "zero_line_color": "black", "zero_line_width": 0.8},
+      "L6_annotation": {"value_labels": true, "label_position": "above_bar", "format": "+.1f%"},
+      "L7_text": {"title": "Comparing Test-time and Pretraining Compute\nin a FLOPs Matched Evauation", "xlabel": "Ratio of Inference Tokens to Pretraining Tokens", "ylabel": "Relative Improvement in Accuracy\nFrom Test-time Compute (%)", "fs_title": 9, "fs_axis_label": 8, "fs_tick_label": 8, "fs_annotation": 7, "fs_legend": 7}
+    },
+
+    "data": {
+      "categories": ["<<1", "~=1", ">>1"],
+      "series": ["Easy Questions", "Medium Questions", "Hard Questions"],
+      "values": {
+        "Easy Questions": [19.1, 2.2, 2.0],
+        "Medium Questions": [-5.6, -35.6, -30.6],
+        "Hard Questions": [0.0, -35.3, -52.9]
+      }
+    },
+    "source": "Figure 1 bottom-right 标注（精确）",
+    "confidence": "精确"
+  },
+
+  "figure3": {
+    "original_ref": "Figure 4",
+    "chart_type": "line",
+    "description": "Compute Optimal Search: 不同搜索策略在不同Generation Budget下的MATH准确率",
+
+    "visual_spec": {
+      "L0_canvas": {"figsize": [5, 4], "background": "white"},
+      "L1_frame": {"spines": {"left": true, "bottom": true, "top": true, "right": true}, "spine_width": 0.5, "tick_direction": "in", "x_scale": "log2"},
+      "L2_grid": {"visible": false},
+      "L3_colors": {"Majority": "#C84858", "ORM Best-of-N Weighted": "#8878B8", "PRM Best-of-N Weighted": "#5B9E5B", "PRM Compute Optimal Oracle": "#4878B8", "PRM Compute Optimal Predicted": "#D88858"},
+      "L4_data": {"type": "line", "line_width": 1.8, "marker": "o", "marker_size": 5},
+      "L5_overlay": {"none": true},
+      "L6_annotation": {"none": true},
+      "L7_text": {"title": "Compute Optimal Search", "xlabel": "Generation Budget", "ylabel": "MATH Test Accuracy (%)", "fs_title": 10, "fs_axis_label": 9, "fs_tick_label": 8, "fs_legend": 7}
+    },
+
+    "data": {
+      "x_values": [1, 2, 4, 8, 16, 32, 64, 128, 256, 512],
+      "series": {
+        "Majority":                    [10.5, 10.8, 11.0, 13.8, 17.5, 22.5, 25.5, 28.0, 28.8, 29.0],
+        "ORM Best-of-N Weighted":      [10.5, 10.8, 16.0, 25.0, 27.0, 29.0, 31.8, 33.0, 34.5, 34.2],
+        "PRM Best-of-N Weighted":      [10.5, 10.5, 15.8, 21.0, 25.5, 29.0, 32.0, 33.5, 35.0, 38.0],
+        "PRM Compute Optimal Oracle":  [10.5, 10.8, 16.0, 27.0, 33.2, 33.5, 34.5, 35.0, 39.5, 39.5],
+        "PRM Compute Optimal Predicted":[10.5, 10.5, 15.8, 27.0, 33.0, 33.0, 33.5, 35.0, 37.0, 37.0]
+      }
+    },
+    "source": "Figure 4 像素读取",
+    "confidence": "±1%"
+  }
+}

@@ -1,0 +1,489 @@
+{
+  "paper": {
+    "title": "AgentAtlas: A Comprehensive Benchmark for Tool-Augmented LLM Agents",
+    "venue": "arXiv 2026.05",
+    "authors": "AgentAtlas Team",
+    "summary": "本文提出AgentAtlas，一个综合性工具增强LLM Agent基准测试框架，覆盖15个现有benchmark的6个评估维度（控制、轨迹、工具执行、安全、记忆与状态、效率）。创新之处在于首次系统性地统一评估框架并引入pass@k指标衡量Agent的多次尝试能力。实验表明Qwen3.5-397B在pass@1上以70%领先，但pass@4时各模型差距显著拉大，Claude Opus 4.5和GPT-5.2 High分别以55%和51%紧随其后。"
+  },
+  "figure1": {
+    "original_ref": "Figure (Overall pass@k)",
+    "chart_type": "multi_line",
+    "description": "Overall pass@k performance for 8 models across k=1,2,3,4",
+    "visual_spec": {
+      "L0_canvas": {
+        "figsize": [
+          6,
+          5
+        ],
+        "background": "white",
+        "subplot_layout": "1",
+        "title": "Overall",
+        "title_position": "top center"
+      },
+      "L1_axes_frame": {
+        "spines": {
+          "left": true,
+          "bottom": true,
+          "top": false,
+          "right": false
+        },
+        "spine_width": 0.8,
+        "tick_direction": "out",
+        "x_axis": {
+          "meaning": "pass@k",
+          "type": "categorical",
+          "labels": [
+            "pass^1",
+            "pass^2",
+            "pass^3",
+            "pass^4"
+          ]
+        },
+        "y_axis": {
+          "meaning": "Pass rate (%)",
+          "type": "continuous",
+          "range": [
+            20,
+            90
+          ],
+          "ticks": [
+            20,
+            30,
+            40,
+            50,
+            60,
+            70,
+            80,
+            90
+          ]
+        }
+      },
+      "L2_grid": {
+        "has_grid": true,
+        "type": "major horizontal only",
+        "style": {
+          "color": "#E0E0E0",
+          "linewidth": 0.5,
+          "linestyle": "-"
+        },
+        "zorder": "behind data"
+      },
+      "L3_color_mapping": {
+        "Qwen3.5-397B-A17B": "#2B4C5E",
+        "Claude Opus 4.5": "#5B3E7A",
+        "GPT-5.2 · High": "#C03050",
+        "Gemini 3 Flash": "#E8A840",
+        "Gemini 3 Pro": "#5B946C",
+        "GLM-5": "#4878B8",
+        "Claude Sonnet 4.5": "#A45268",
+        "GPT-5.2 · None": "#B0B0B0"
+      },
+      "L4_primary_data": {
+        "chart_type": "line",
+        "line_width": 2.0,
+        "marker": "o",
+        "marker_size": 6,
+        "series_count": 8
+      },
+      "L5_overlay": {
+        "has_overlay": false
+      },
+      "L6_annotation": {
+        "has_value_labels": false,
+        "model_name_labels": "right side of last point",
+        "label_style": "colored text matching line color"
+      },
+      "L7_legend_text": {
+        "has_legend_box": false,
+        "labels_inline": true,
+        "fs_title": 14,
+        "fs_axis_label": 11,
+        "fs_tick_label": 10,
+        "fs_inline_label": 9
+      }
+    },
+    "data": {
+      "x_labels": [
+        "pass^1",
+        "pass^2",
+        "pass^3",
+        "pass^4"
+      ],
+      "series": {
+        "Qwen3.5-397B-A17B": [
+          70,
+          63,
+          57,
+          56
+        ],
+        "Claude Opus 4.5": [
+          70,
+          62,
+          55,
+          53
+        ],
+        "GPT-5.2 · High": [
+          70,
+          62,
+          51,
+          50
+        ],
+        "Gemini 3 Flash": [
+          67,
+          57,
+          49,
+          48
+        ],
+        "Gemini 3 Pro": [
+          65,
+          57,
+          45,
+          45
+        ],
+        "GLM-5": [
+          63,
+          52,
+          45,
+          40
+        ],
+        "Claude Sonnet 4.5": [
+          63,
+          44,
+          37,
+          31
+        ],
+        "GPT-5.2 · None": [
+          55,
+          44,
+          37,
+          31
+        ]
+      }
+    },
+    "source": "Figure pixel calibration (y-axis 20-90%, x-axis pass^1-4)",
+    "confidence": "±2%",
+    "structure": {
+      "subplots": 1,
+      "x_axis": {
+        "meaning": "pass@k",
+        "type": "categorical",
+        "count": 4
+      },
+      "y_axis": {
+        "meaning": "Pass rate (%)",
+        "type": "continuous",
+        "range": [
+          20,
+          90
+        ]
+      },
+      "series_count": 8
+    }
+  },
+  "figure2": {
+    "original_ref": "Figure (Benchmark coverage)",
+    "chart_type": "stacked_bar",
+    "description": "Number of benchmarks (of 15) covering each evaluation dimension, split by Strong/Partial/Absent",
+    "visual_spec": {
+      "L0_canvas": {
+        "figsize": [
+          10,
+          4.5
+        ],
+        "background": "white",
+        "subplot_layout": "1"
+      },
+      "L1_axes_frame": {
+        "spines": {
+          "left": true,
+          "bottom": true,
+          "top": false,
+          "right": false
+        },
+        "spine_width": 0.6,
+        "tick_direction": "out",
+        "x_axis": {
+          "meaning": "Number of benchmarks (of 15)",
+          "type": "continuous",
+          "range": [
+            0,
+            15
+          ],
+          "ticks": [
+            0,
+            5,
+            10,
+            15
+          ]
+        },
+        "y_axis": {
+          "meaning": "Evaluation dimension",
+          "type": "categorical",
+          "labels": [
+            "Control",
+            "Trajectory",
+            "Tool execution",
+            "Security",
+            "Memory & state",
+            "Efficiency"
+          ]
+        }
+      },
+      "L2_grid": {
+        "has_grid": false
+      },
+      "L3_color_mapping": {
+        "Strong (2)": "#003F7F",
+        "Partial (1)": "#70D0F0",
+        "Absent (0)": "#D8E8EC"
+      },
+      "L4_primary_data": {
+        "chart_type": "horizontal_stacked_bar",
+        "bar_height": 0.6,
+        "edge": "none",
+        "total_per_bar": 15
+      },
+      "L5_overlay": {
+        "has_overlay": false
+      },
+      "L6_annotation": {
+        "has_value_labels": true,
+        "label_position": "inside bar segment (white text for dark, dark text for light)",
+        "right_side_text": "benchmark names for Strong category"
+      },
+      "L7_legend_text": {
+        "has_legend": true,
+        "legend_position": "lower right",
+        "legend_items": [
+          "Strong (2)",
+          "Partial (1)",
+          "Absent (0)"
+        ],
+        "frameon": true,
+        "fs_axis_label": 11,
+        "fs_tick_label": 10,
+        "fs_annotation": 9,
+        "fs_right_labels": 8.5
+      }
+    },
+    "data": {
+      "categories": [
+        "Control",
+        "Trajectory",
+        "Tool execution",
+        "Security",
+        "Memory & state",
+        "Efficiency"
+      ],
+      "strong": [
+        2,
+        3,
+        9,
+        4,
+        1,
+        6
+      ],
+      "partial": [
+        12,
+        11,
+        6,
+        4,
+        10,
+        0
+      ],
+      "absent": [
+        1,
+        1,
+        0,
+        7,
+        4,
+        9
+      ],
+      "right_labels": {
+        "Control": "τ-bench, ToolSandbox",
+        "Trajectory": "AgentRx, ATBench, AgentProcessBench",
+        "Tool execution": "τ-bench, ToolSandbox, API-Bank, AgentDojo\nMCPSecBench, MCPTox, AgentRx, ATBench\nAgentProcessBench",
+        "Security": "AgentDojo, MCPSecBench, MCPTox, ATBench",
+        "Memory & state": "ToolSandbox",
+        "Efficiency": "—"
+      }
+    },
+    "source": "Figure annotations (exact values labeled inside bars)",
+    "confidence": "exact",
+    "structure": {
+      "subplots": 1,
+      "x_axis": {
+        "meaning": "Number of benchmarks (of 15)",
+        "type": "continuous",
+        "range": [
+          0,
+          15
+        ]
+      },
+      "y_axis": {
+        "meaning": "Evaluation dimension",
+        "type": "categorical",
+        "count": 6
+      },
+      "series_count": 3
+    }
+  },
+  "figure3": {
+    "original_ref": "Figure (CCBench vs cost scatter)",
+    "chart_type": "scatter",
+    "description": "CCBench success rate (%) vs relative cost for 8 models from 3 providers, with connecting lines within each provider",
+    "visual_spec": {
+      "L0_canvas": {
+        "figsize": [
+          7,
+          5.5
+        ],
+        "background": "white",
+        "subplot_layout": "1"
+      },
+      "L1_axes_frame": {
+        "spines": {
+          "left": true,
+          "bottom": true,
+          "top": false,
+          "right": false
+        },
+        "spine_width": 0.8,
+        "tick_direction": "out",
+        "x_axis": {
+          "meaning": "relative cost (no numeric labels)",
+          "type": "continuous"
+        },
+        "y_axis": {
+          "meaning": "CCBench success rate (%)",
+          "type": "continuous",
+          "range": [
+            15,
+            85
+          ],
+          "ticks": [
+            25,
+            50,
+            75
+          ]
+        }
+      },
+      "L2_grid": {
+        "has_grid": true,
+        "type": "major horizontal dashed",
+        "style": {
+          "color": "#E0E0E0",
+          "linewidth": 0.5,
+          "linestyle": "--"
+        },
+        "zorder": "behind data"
+      },
+      "L3_color_mapping": {
+        "Anthropic_marker": "#3D2D6B",
+        "OpenAI_marker": "#C03050",
+        "Google_marker": "#1A5060",
+        "Anthropic_line": "#A0A0B8",
+        "OpenAI_line": "#E0A0B0",
+        "Google_line": "#90A0B0"
+      },
+      "L4_primary_data": {
+        "chart_type": "scatter",
+        "marker_size": 80,
+        "marker_shape": "o",
+        "connecting_lines": true,
+        "line_width": 1.5,
+        "line_color": "lighter version of marker color"
+      },
+      "L5_overlay": {
+        "has_overlay": false
+      },
+      "L6_annotation": {
+        "has_value_labels": false,
+        "model_name_labels": "adjacent to each point",
+        "label_color": "gray/dark"
+      },
+      "L7_legend_text": {
+        "has_legend": true,
+        "legend_position": "upper left",
+        "legend_items": [
+          "Anthropic",
+          "OpenAI",
+          "Google"
+        ],
+        "legend_style": "colored dot + colored text",
+        "frameon": false,
+        "fs_axis_label": 11,
+        "fs_tick_label": 10,
+        "fs_model_label": 9
+      }
+    },
+    "data": {
+      "Anthropic": {
+        "models": [
+          "Haiku 4.5",
+          "Sonnet 4.5",
+          "Opus 4.5",
+          "Opus 4.6"
+        ],
+        "x_relative": [
+          0.1,
+          0.3,
+          0.55,
+          0.95
+        ],
+        "y_ccbench": [
+          22,
+          34,
+          60,
+          75
+        ]
+      },
+      "OpenAI": {
+        "models": [
+          "GPT 5.1-codex-mini",
+          "GPT 5.2-codex"
+        ],
+        "x_relative": [
+          0.25,
+          0.55
+        ],
+        "y_ccbench": [
+          40,
+          75
+        ]
+      },
+      "Google": {
+        "models": [
+          "Gemini 3 Pro",
+          "Gemini 3 Flash"
+        ],
+        "x_relative": [
+          0.4,
+          0.6
+        ],
+        "y_ccbench": [
+          47,
+          52
+        ]
+      }
+    },
+    "source": "Figure pixel calibration + visual observation",
+    "confidence": "Y-values ±3%, X-values relative (no axis labels)",
+    "structure": {
+      "subplots": 1,
+      "x_axis": {
+        "meaning": "Relative cost",
+        "type": "continuous"
+      },
+      "y_axis": {
+        "meaning": "CCBench success rate (%)",
+        "type": "continuous",
+        "range": [
+          15,
+          85
+        ]
+      },
+      "series_count": 3
+    }
+  }
+}

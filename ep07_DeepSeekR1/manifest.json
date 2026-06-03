@@ -1,0 +1,45 @@
+{
+  "project": "跟着顶会学绘图",
+  "episode": 6,
+  "date": "2026-05-12",
+  "paper": {
+    "title": "DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via Reinforcement Learning",
+    "venue": "ICML 2025",
+    "short_name": "DeepSeekR1"
+  },
+  "figures": [
+    {
+      "index": 1,
+      "original_ref": "Figure 10",
+      "chart_type": "grouped_bar",
+      "chart_type_zh": "分组柱形图",
+      "files": {
+        "original": "1.1_原图.png",
+        "generated": "1.2_生成图.png",
+        "comparison": "1.3_对比图.png"
+      }
+    },
+    {
+      "index": 2,
+      "original_ref": "Figure 4",
+      "chart_type": "多系列折线图",
+      "chart_type_zh": "折线图",
+      "files": {
+        "original": "2.1_原图.png",
+        "generated": "2.2_生成图.png",
+        "comparison": "2.3_对比图.png"
+      }
+    },
+    {
+      "index": 3,
+      "original_ref": "Figure 6",
+      "chart_type": "dual_axis_line",
+      "chart_type_zh": "双轴折线图",
+      "files": {
+        "original": "3.1_原图.png",
+        "generated": "3.2_生成图.png",
+        "comparison": "3.3_对比图.png"
+      }
+    }
+  ]
+}

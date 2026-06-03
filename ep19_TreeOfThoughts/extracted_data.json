@@ -1,0 +1,88 @@
+{
+  "paper": {
+    "title": "Tree of Thoughts: Deliberate Problem Solving with Large Language Models",
+    "venue": "NeurIPS 2023",
+    "authors": "Yao, Yu, Zhao, Shafran, Griffiths, Cao, Narasimhan",
+    "summary": "本文提出 Tree of Thoughts (ToT)，把语言模型推理建模为对中间思维树的搜索：每一步生成多个候选思维并用模型自评估优劣，再用 BFS/DFS 进行探索与回溯。创新之处在于把链式 CoT 的单路径生成升级为可分支、可前瞻、可回溯的深思熟虑推理。在 Game of 24 上 ToT (b=5) 达成 74% 成功率，相较 CoT 的 4% 显著提升，同时在 Creative Writing 与 Mini Crosswords 上也优于 IO/CoT 基线。",
+    "arxiv_id": "2305.10601"
+  },
+  "figure1": {
+    "original_ref": "Figure 3a",
+    "chart_type": "multi_line",
+    "description": "Game of 24 — Success rate vs nodes visited per task. IO/CoT use best-of-k (k=1..100); ToT uses b=1..5 (5 points).",
+    "structure": {
+      "subplots": "1x1 multi-line",
+      "panel_bg": "white",
+      "grid": "horizontal light grey lines (#d5d6d5)",
+      "lines": 3,
+      "io_style": "solid blue",
+      "cot_style": "solid orange",
+      "tot_style": "dashed green",
+      "legend_loc": "lower right inside"
+    },
+    "data": {
+      "x_label": "",
+      "y_label": "",
+      "x_range": [0, 100],
+      "y_range": [0, 0.75],
+      "x_ticks": [0, 25, 50, 75, 100],
+      "y_ticks": [0.2, 0.4, 0.6],
+      "io_x":  [1, 3, 5, 10, 15, 20, 30, 40, 50, 70, 100],
+      "io_y":  [0.07, 0.10, 0.13, 0.18, 0.20, 0.22, 0.25, 0.27, 0.29, 0.31, 0.33],
+      "cot_x": [1, 3, 5, 10, 15, 20, 30, 40, 50, 70, 100],
+      "cot_y": [0.04, 0.10, 0.14, 0.21, 0.26, 0.30, 0.35, 0.40, 0.43, 0.47, 0.49],
+      "tot_x": [20, 32, 42, 52, 65],
+      "tot_y": [0.45, 0.58, 0.65, 0.70, 0.74]
+    },
+    "source": "Pixel calibration on Figure 3a. Endpoints anchored: IO best-of-100=33%, CoT best-of-100=49%, ToT b=1=45%, ToT b=5=74% (paper Table 2)."
+  },
+  "figure2": {
+    "original_ref": "Figure 3b",
+    "chart_type": "grouped_bar",
+    "description": "Game of 24 — Fraction of samples that failed at each step (1/2/3/4) vs reached Correct, comparing CoT and ToT (b=5).",
+    "structure": {
+      "subplots": "1x1 grouped bar",
+      "panel_bg": "white",
+      "grid": "horizontal light grey lines (#d5d6d5)",
+      "x_categories": ["1", "2", "3", "4", "Correct"],
+      "groups_per_category": 2,
+      "legend_loc": "upper center inside"
+    },
+    "data": {
+      "categories": ["1", "2", "3", "4", "Correct"],
+      "methods": ["CoT", "ToT (b=5)"],
+      "values": {
+        "CoT":        [0.62, 0.32, 0.005, 0.01, 0.04],
+        "ToT (b=5)":  [0.10, 0.04, 0.06, 0.06, 0.74]
+      },
+      "x_label": "",
+      "y_label": "",
+      "y_range": [0.0, 0.75],
+      "y_ticks": [0.0, 0.2, 0.4, 0.6]
+    },
+    "source": "Pixel calibration on Figure 3b. Anchors: ToT (b=5) Correct=0.74 (paper Table 2 = 74%); CoT step-1 fail ≈ 0.60 (paper text: 'around 60% of CoT samples already failed the task after generating the first step')."
+  },
+  "figure3": {
+    "original_ref": "Figure 5b",
+    "chart_type": "bar",
+    "description": "Creative Writing — Human pairwise coherency comparison (out of 100 pairs). CoT > ToT: 21, Similar: 38, ToT > CoT: 41.",
+    "structure": {
+      "subplots": "1x1 single-series bar",
+      "panel_bg": "white",
+      "grid": "horizontal light grey lines (#d5d6d5)",
+      "x_categories": ["CoT > ToT", "Similar", "ToT > CoT"],
+      "bars_per_category": 1,
+      "value_labels": "inside white text",
+      "legend": "none"
+    },
+    "data": {
+      "categories": ["CoT > ToT", "Similar", "ToT > CoT"],
+      "values": [21, 38, 41],
+      "x_label": "",
+      "y_label": "",
+      "y_range": [0, 45],
+      "y_ticks": [0, 10, 20, 30, 40]
+    },
+    "source": "Direct readout from Figure 5b — labels printed on bars: 21 / 38 / 41."
+  }
+}

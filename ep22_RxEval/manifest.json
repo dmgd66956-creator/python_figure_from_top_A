@@ -1,0 +1,56 @@
+{
+  "date": "2026-06-02",
+  "paper": {
+    "title": "RxEval: A Prescription-Level Benchmark for Evaluating LLM Medication Recommendation",
+    "venue": "arXiv 2026.05 (2605.14543)",
+    "pdf_file": "paper.pdf",
+    "summary": "本文提出 RxEval，首个处方级 LLM 用药推荐多选题基准，从 EHR 抽取 1547 题、覆盖 18 个 ICD 章节与 969 种药物。创新在于将单标签 MedQA 升级为药物子集多选 (avg 7.03 选项/2.03 正确) 并联合编码诊疗轨迹。结果显示在 16 款 LLM 上 RxEval 平均准确率比 MedQA 低约 30%，GPT-5 与 Gemini-2.5-Pro 在长轨迹末段 F1 大幅下滑。"
+  },
+  "figures": [
+    {
+      "index": 1,
+      "original_ref": "Figure 3(c) Medication frequency",
+      "chart_type": "line",
+      "description": "对数-对数长尾折线：969 种药物按出现频次排序，三系列 All/Correct/Distractor",
+      "files": {
+        "original": "1.1_原图.png",
+        "reproduced": "1.2_生成图.png",
+        "comparison": "1.3_对比图.png"
+      },
+      "data_source": "Figure 3(c) 像素校准提取（PDF tick label 中心定位 + 6x 渲染追顶法 + 单调非增约束）",
+      "quality_notes": "log-log 坐标 + 浅蓝背景填充。曲线尾部锯齿源自原图 staircase 步进，已保留。"
+    },
+    {
+      "index": 2,
+      "original_ref": "Figure 3(d) Answers per MCQ",
+      "chart_type": "bar",
+      "description": "单系列柱形图：1547 道题中 1 答案占绝大多数（853），数量随答案数衰减",
+      "files": {
+        "original": "2.1_原图.png",
+        "reproduced": "2.2_生成图.png",
+        "comparison": "2.3_对比图.png"
+      },
+      "data_source": "Figure 3(d) 标注（数值直接打在柱顶）",
+      "quality_notes": "横轴 1-6 数字 + ≥7 复合标签；柱顶白色注解；浅水平网格。"
+    },
+    {
+      "index": 3,
+      "original_ref": "Figure 3(f) Input token length",
+      "chart_type": "histogram",
+      "description": "MedQA vs RxEval 输入长度分布对比：log_x 轴，模式相差 13×",
+      "files": {
+        "original": "3.1_原图.png",
+        "reproduced": "3.2_生成图.png",
+        "comparison": "3.3_对比图.png"
+      },
+      "data_source": "Figure 3(f) 像素校准提取（颜色区域逐列追顶 + 整数 bin 分组）",
+      "quality_notes": "alpha 0.85 的双叠加分布；图例带边框；对数 X 轴 100/300/1k/3k/10k/30k/100k 七档。"
+    }
+  ],
+  "xhs_template": {
+    "cover": "K",
+    "images": "A",
+    "hashtag": "D",
+    "cover_palette_bg": "#F5E8D8"
+  }
+}

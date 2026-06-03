@@ -1,0 +1,151 @@
+{
+  "paper": {
+    "title": "AgentKernelArena: Generalization-Aware Benchmarking of GPU Kernel Optimization Agents",
+    "venue": "arXiv 2026.05 (2605.16819)",
+    "authors": "Liang Ke, et al.",
+    "summary": "本文提出 AgentKernelArena，首个面向 GPU kernel 优化 agent 的泛化评估基准，覆盖 HIP-to-HIP、Triton-to-Triton、PyTorch-to-HIP 共 196 任务。创新在于把 agent 在原始 config 获得的 kernel 直接迁到 unseen 配置重测，分离记忆与泛化。8 款 agent 在 unseen 上保持 60%-100% 正确率，Cursor Opus 4.7 在 PyTorch-to-HIP 平均 6.6× 加速。"
+  },
+  "figure1": {
+    "original_ref": "Figure 2",
+    "chart_type": "grouped_bar",
+    "description": "fused_moe_gptq_awq kernel 在 5 种 (M,E,K,N,grp) 配置下 Baseline (Triton 原版) vs Optimized (Claude Code Opus 4.6 改写) 的执行时间对比 (ms)；柱顶标注加速比",
+    "structure": {
+      "subplots": 1,
+      "x_axis": {"meaning": "(M,E,K,N,grp) 配置", "type": "categorical", "count": 5},
+      "y_axis": {"meaning": "Execution time (ms)", "type": "continuous", "range": [0, 0.85]},
+      "background_fill": "white",
+      "spines": {"left": true, "bottom": true, "top": false, "right": false},
+      "grid": true, "grid_axis": "y",
+      "series_count": 2,
+      "series": [
+        {"name": "Baseline (original Triton)", "color": "#4472a8", "style": "solid"},
+        {"name": "Optimized (agent)",          "color": "#c0464e", "style": "solid"}
+      ],
+      "annotations": "speedup label above each baseline bar (1.55x, 1.57x, 2.35x, 2.40x, 2.37x)",
+      "legend": {"location": "upper left", "frameon": true}
+    },
+    "data": {
+      "configs": [
+        "M=16, E=4\nK=64, N=64\ngrp=32",
+        "M=32, E=4\nK=128, N=128\ngrp=64",
+        "M=64, E=8\nK=128, N=128\ngrp=64",
+        "M=64, E=8\nK=256, N=256\ngrp=128",
+        "M=128, E=8\nK=256, N=256\ngrp=128"
+      ],
+      "baseline_ms": [0.420, 0.425, 0.726, 0.737, 0.732],
+      "optimized_ms": [0.270, 0.268, 0.306, 0.304, 0.304],
+      "speedups": [1.55, 1.57, 2.35, 2.40, 2.37]
+    },
+    "calibration": {
+      "method": "pixel_calibration on 6x render",
+      "y_zero_px": 819,
+      "y_scale_px_per_ms": 723
+    },
+    "source": "Figure 2 像素校准提取 + speedup 标注交叉验证（误差 ≤ 0.02 ms）",
+    "confidence": "高（baseline/optimized 比值与标注 speedup 一致）"
+  },
+  "figure2": {
+    "original_ref": "Figure 3",
+    "chart_type": "stacked_bar",
+    "description": "Unseen-configuration generalization 的 quadrant 分布：8 个 agent 在三种迁移类型 (HIP-to-HIP/Triton-to-Triton/PyTorch-to-HIP) 上 4 类结果占比 (Both pass / Opt improvement / Both fail / Opt regression)",
+    "structure": {
+      "subplots": 3,
+      "layout": "1x3 横排",
+      "x_axis": {"meaning": "Tasks (%)", "type": "continuous", "range": [0, 100]},
+      "y_axis": {"meaning": "Agent · Model", "type": "categorical", "count": 8},
+      "background_fill": "white",
+      "spines": {"left": true, "bottom": true, "top": false, "right": false},
+      "grid": false,
+      "series_count": 4,
+      "series": [
+        {"name": "Both pass",      "color": "#22a059", "style": "fill"},
+        {"name": "Opt improvement","color": "#2476b8", "style": "fill"},
+        {"name": "Both fail",      "color": "#9aa6a6", "style": "fill"},
+        {"name": "Opt regression", "color": "#e04434", "style": "fill"}
+      ],
+      "annotations": "in-bar value labels + 'Cond. corr.' percent on right side",
+      "legend": {"location": "below center", "frameon": false, "ncol": 4}
+    },
+    "data": {
+      "agents": [
+        "Claude Code · Opus 4.6",
+        "Claude Code · Sonnet 4.6",
+        "Cursor · Opus 4.7 High",
+        "Cursor · Opus 4.6 High",
+        "Cursor · GPT-5.4 High",
+        "Cursor · GPT-5.3-Codex High",
+        "Cursor · Composer 2",
+        "Codex · GPT-5.3-Codex"
+      ],
+      "hip_to_hip": {
+        "both_pass":       [83, 82, 88, 83, 86, 83, 83, 83],
+        "opt_improvement": [ 1,  3,  4,  4,  0,  0,  0,  0],
+        "both_fail":       [11, 10,  8,  8, 12, 12, 14, 12],
+        "opt_regression":  [ 5,  5,  0,  5,  2,  5,  3,  5],
+        "cond_correctness": [95, 94, 100, 95, 98, 95, 97, 95]
+      },
+      "triton_to_triton": {
+        "both_pass":       [72, 75, 72, 74, 78, 79, 77, 77],
+        "opt_improvement": [ 1,  0,  1,  1,  4,  2,  2,  2],
+        "both_fail":       [20, 20, 19, 20, 17, 18, 19, 18],
+        "opt_regression":  [ 7,  5,  7,  5,  1,  1,  2,  3],
+        "cond_correctness": [91, 95, 92, 94, 99, 99, 97, 97]
+      },
+      "pytorch_to_hip": {
+        "both_pass":       [82, 86, 82, 89, 60, 75, 64, 90],
+        "opt_improvement": [ 0,  0,  0,  0,  0,  0,  0,  0],
+        "both_fail":       [ 0,  0,  0,  0,  0,  0,  0,  0],
+        "opt_regression":  [18, 14, 18, 11, 40, 25, 36, 10],
+        "cond_correctness": [82, 86, 82, 89, 60, 75, 64, 90]
+      }
+    },
+    "source": "Figure 3 in-bar value labels + 'Cond. corr.' annotation 直接抄录",
+    "confidence": "精确"
+  },
+  "figure3": {
+    "original_ref": "Figure 4",
+    "chart_type": "scatter",
+    "description": "Unseen-Configuration vs Original-Run mean speedup：8 个 agent 在三种迁移类型上的散点对比，y=x 虚线表示完美迁移；8 个模型用 3 种 marker (Circle/Square/Diamond) 区分 Agent，颜色区分模型",
+    "structure": {
+      "subplots": 3,
+      "layout": "1x3 横排",
+      "x_axis": {"meaning": "Original-Run Mean Speedup (x)", "type": "continuous"},
+      "y_axis": {"meaning": "Unseen-Config Mean Speedup (x)", "type": "continuous"},
+      "background_fill": "white",
+      "spines": {"left": true, "bottom": true, "top": true, "right": true},
+      "grid": "very light gray",
+      "subplot_titles": ["HIP-to-HIP (24 tasks)", "Triton-to-Triton (148 tasks)", "PyTorch-to-HIP (24 tasks)"],
+      "axis_ranges": {
+        "hip_to_hip":    {"x": [0, 11], "y": [0, 11]},
+        "triton_to_triton": {"x": [0.85, 1.55], "y": [0.85, 1.55]},
+        "pytorch_to_hip":  {"x": [3, 7.2], "y": [3, 7.2]}
+      },
+      "diagonal": {"label": "Perfect transfer (y=x)", "style": "dashed gray"},
+      "background_quadrants": [
+        {"name": "Speedup gain on unseen configs", "color": "#d4ecdc", "position": "upper-left"},
+        {"name": "Speedup loss on unseen configs", "color": "#fbe1de", "position": "lower-right"}
+      ],
+      "markers": [
+        {"shape": "circle",  "agent": "Claude Code"},
+        {"shape": "square",  "agent": "Cursor"},
+        {"shape": "diamond", "agent": "Codex"}
+      ],
+      "model_colors": {
+        "Claude Code Opus 4.6":       "#df7373",
+        "Claude Code Sonnet 4.6":     "#dba14b",
+        "Cursor Opus 4.7 High":       "#3a2c80",
+        "Cursor Opus 4.6 High":       "#86bdda",
+        "Cursor GPT-5.4 High":        "#1f7e3a",
+        "Cursor GPT-5.3-Codex High":  "#9a3a76",
+        "Cursor Composer 2":          "#882a55",
+        "Codex GPT-5.3-Codex":        "#3aa691"
+      }
+    },
+    "data": {
+      "source_file": "cache/fig3_scatter.json",
+      "note": "8 个模型 × 3 个子图 = 24 个数据点；从原图标签位置目测读取（误差 ±5%）"
+    },
+    "source": "Figure 4 散点位置目测读取 + 标签交叉确认",
+    "confidence": "中（散点 ±5% 容差）"
+  }
+}

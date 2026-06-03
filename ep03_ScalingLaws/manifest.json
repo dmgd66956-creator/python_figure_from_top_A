@@ -1,0 +1,49 @@
+{
+  "date": "2026-05-09",
+  "paper": {
+    "title": "Scaling Laws for Pre-training Agents and World Models",
+    "venue": "ICML 2025",
+    "pdf_path": "2026-05-09_ScalingLaws/paper.pdf"
+  },
+  "figures": [
+    {
+      "index": 1,
+      "original_ref": "Figure 5",
+      "chart_type": "log_log_scaling",
+      "description": "WM-Token-256 scaling: parametric fit + frontier fit for optimal N and D",
+      "files": {
+        "original": "1.1_原图.png",
+        "reproduced": "1.2_生成图.png",
+        "comparison": "1.3_对比图.png"
+      },
+      "data_source": "Table 1 power law coefficients + pixel-calibrated training curves",
+      "quality_notes": "Cyan→magenta colormap, dashed parametric fits per model"
+    },
+    {
+      "index": 2,
+      "original_ref": "Figure 9",
+      "chart_type": "log_log_extrapolation",
+      "description": "WM-Token-256 extrapolation test with 894M parameter model",
+      "files": {
+        "original": "2.1_原图.png",
+        "reproduced": "2.2_生成图.png",
+        "comparison": "2.3_对比图.png"
+      },
+      "data_source": "Table 1 + Section 4.3 extrapolation coefficients",
+      "quality_notes": "894M point marked with × on extrapolated power law"
+    },
+    {
+      "index": 3,
+      "original_ref": "Figure 10",
+      "chart_type": "log_log_training_curves",
+      "description": "Character modeling: Dense vs Sparse vs Super-classed loss scaling",
+      "files": {
+        "original": "3.1_原图.png",
+        "reproduced": "3.2_生成图.png",
+        "comparison": "3.3_对比图.png"
+      },
+      "data_source": "Figure 10 annotations + Section 5.1 scaling coefficients",
+      "quality_notes": "8 model sizes, dashed per-model parametric fits, magenta envelope"
+    }
+  ]
+}

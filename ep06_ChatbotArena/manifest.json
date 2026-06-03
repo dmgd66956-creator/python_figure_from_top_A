@@ -1,0 +1,44 @@
+{
+  "date": "2026-05-11",
+  "episode": 5,
+  "paper": {
+    "title": "Chatbot Arena: An Open Platform for Evaluating LLMs by Human Preference",
+    "venue": "ICML 2024",
+    "pdf_file": "paper.pdf"
+  },
+  "figures": [
+    {
+      "index": 1,
+      "original_ref": "Figure 4",
+      "chart_type": "horizontal_grouped_bar",
+      "files": {
+        "original": "1.1_原图.png",
+        "reproduced": "1.2_生成图.png",
+        "comparison": "1.3_对比图.png"
+      }
+    },
+    {
+      "index": 2,
+      "original_ref": "Figure 5",
+      "chart_type": "forest_plot",
+      "files": {
+        "original": "2.1_原图.png",
+        "reproduced": "2.2_生成图.png",
+        "comparison": "2.3_对比图.png"
+      }
+    },
+    {
+      "index": 3,
+      "original_ref": "Figure 6",
+      "chart_type": "confidence_band_line",
+      "files": {
+        "original": "3.1_原图.png",
+        "reproduced": "3.2_生成图.png",
+        "comparison": "3.3_对比图.png"
+      }
+    }
+  ],
+  "data_file": "extracted_data.json",
+  "colors_file": "extracted_colors.json",
+  "reproduce_script": "reproduce.py"
+}

@@ -1,0 +1,33 @@
+{
+  "paper": {
+    "title": "Towards Precise Scaling Laws for Video Diffusion Transformers",
+    "venue": "CVPR 2025",
+    "short_name": "VideoScalingLaw"
+  },
+  "figures": [
+    {
+      "index": 1,
+      "chart_type": "heatmap",
+      "description": "Predictions of optimal hyperparameters on 1.07B model size with 4B and 10B training tokens",
+      "original": "1.1_原图.png",
+      "generated": "1.2_生成图.png",
+      "comparison": "1.3_对比图.png"
+    },
+    {
+      "index": 2,
+      "chart_type": "line",
+      "description": "Performance scaling curve extrapolated to larger models",
+      "original": "2.1_原图.png",
+      "generated": "2.2_生成图.png",
+      "comparison": "2.3_对比图.png"
+    },
+    {
+      "index": 3,
+      "chart_type": "scatter",
+      "description": "Empirical loss v.s. N under optimal and fixed suboptimal hyperparameters",
+      "original": "3.1_原图.png",
+      "generated": "3.2_生成图.png",
+      "comparison": "3.3_对比图.png"
+    }
+  ]
+}

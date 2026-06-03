@@ -1,0 +1,34 @@
+{
+  "date": "2026-05-09",
+  "paper": {
+    "title": "WildBench: Benchmarking LLMs with Challenging Tasks from Real Users in the Wild",
+    "venue": "ICLR 2025",
+    "url": "https://arxiv.org/abs/2406.04770"
+  },
+  "figures": [
+    {
+      "index": 1,
+      "original_ref": "Figure 2",
+      "chart_type": "histogram",
+      "description": "Distribution of query lengths in AlpacaEval, ArenaHard, and WildBench",
+      "difficulty": "★★",
+      "data_source": "synthetic (matching Table 1 statistics)"
+    },
+    {
+      "index": 2,
+      "original_ref": "Figure 3",
+      "chart_type": "pie",
+      "description": "Distribution of task categories in AlpacaEval, ArenaHard, and WildBench",
+      "difficulty": "★",
+      "data_source": "percentage labels from figure"
+    },
+    {
+      "index": 3,
+      "original_ref": "Figure 5",
+      "chart_type": "radar",
+      "description": "Performance breakdown by task category of 6 models on WildBench",
+      "difficulty": "★★★",
+      "data_source": "estimated from radar visual (WB-Score per category)"
+    }
+  ]
+}

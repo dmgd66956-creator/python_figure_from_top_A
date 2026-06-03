@@ -1,0 +1,49 @@
+{
+  "date": "2026-05-09",
+  "paper": {
+    "title": "MMLU-Pro: A More Robust and Challenging Multi-Task Language Understanding Benchmark",
+    "venue": "NeurIPS 2024",
+    "pdf_path": "2026-05-09_MMLUPro/paper.pdf"
+  },
+  "figures": [
+    {
+      "index": 1,
+      "original_ref": "Figure 3",
+      "chart_type": "pie_dual",
+      "description": "MMLU-Pro数据集的学科分布和数据来源分布双饼图",
+      "files": {
+        "original": "1.1_原图.png",
+        "reproduced": "1.2_生成图.png",
+        "comparison": "1.3_对比图.png"
+      },
+      "data_source": "Figure 3 百分比标注精确抄录",
+      "quality_notes": "14个学科 + 4个数据来源，百分比直接从图中读取"
+    },
+    {
+      "index": 2,
+      "original_ref": "Figure 4",
+      "chart_type": "grouped_bar",
+      "description": "MMLU vs MMLU-Pro 10模型性能对比分组柱形图",
+      "files": {
+        "original": "2.1_原图.png",
+        "reproduced": "2.2_生成图.png",
+        "comparison": "2.3_对比图.png"
+      },
+      "data_source": "Figure 4 柱顶数值标注精确抄录",
+      "quality_notes": "数值100%精确，颜色从原图采样"
+    },
+    {
+      "index": 3,
+      "original_ref": "Figure 5",
+      "chart_type": "error_bar_range",
+      "description": "不同Prompt下MMLU与MMLU-Pro性能波动范围对比",
+      "files": {
+        "original": "3.1_原图.png",
+        "reproduced": "3.2_生成图.png",
+        "comparison": "3.3_对比图.png"
+      },
+      "data_source": "Figure 5 上下界数值标注精确抄录",
+      "quality_notes": "误差线范围数值100%精确"
+    }
+  ]
+}

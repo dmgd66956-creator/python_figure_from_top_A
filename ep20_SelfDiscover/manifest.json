@@ -1,0 +1,58 @@
+{
+  "date": "2026-05-26",
+  "paper": {
+    "title": "Self-Discover: Large Language Models Self-Compose Reasoning Structures",
+    "venue": "ICML 2024",
+    "pdf_path": "paper.pdf",
+    "summary": "本文提出 SELF-DISCOVER 框架，让 LLM 在原子推理模块库中通过 SELECT/ADAPT/IMPLEMENT 三步自主组合出任务专属的结构化推理流程，再用该 JSON 结构指导作答。创新点是把 CoT/ToT 等人工指定的策略升级为模型自发现的元推理结构，仅需 3 次任务级元提示。在 BBH/T4D/MATH 上 GPT-4+Self-Discover 相对 CoT 提升 6%/33%/2%。"
+  },
+  "figures": [
+    {
+      "index": 1,
+      "original_ref": "Figure 4",
+      "chart_type": "grouped_bar",
+      "description": "BBH 4 类问题上 Self-Discover 相对 Direct/CoT 的平均准确率提升",
+      "files": {
+        "original": "1.1_原图.png",
+        "reproduced": "1.2_生成图.png",
+        "comparison": "1.3_对比图.png"
+      },
+      "data_source": "Direct readout (labels above bars)"
+    },
+    {
+      "index": 2,
+      "original_ref": "Figure 5",
+      "chart_type": "scatter",
+      "description": "GPT-4 在 Movie Recommendation 与 Geometric Shapes 上的 Accuracy vs # Inference Calls",
+      "files": {
+        "original": "2.1_原图.png",
+        "reproduced": "2.2_生成图.png",
+        "comparison": "2.3_对比图.png"
+      },
+      "data_source": "Visual readout on 5-unit grid; x values from paper text (1/10/40 calls)"
+    },
+    {
+      "index": 3,
+      "original_ref": "Figure 8",
+      "chart_type": "grouped_bar",
+      "description": "4 个 BBH 任务上 Self-Discover 三动作（S/SA/SAI）消融",
+      "files": {
+        "original": "3.1_原图.png",
+        "reproduced": "3.2_生成图.png",
+        "comparison": "3.3_对比图.png"
+      },
+      "data_source": "Direct readout (16 labels above bars)"
+    }
+  ],
+  "files": {
+    "code": "reproduce.py",
+    "data": "extracted_data.json",
+    "colors": "extracted_colors.json",
+    "paper": "paper.pdf"
+  },
+  "xhs_template": {
+    "cover": "K",
+    "images": "A",
+    "hashtag": "F"
+  }
+}

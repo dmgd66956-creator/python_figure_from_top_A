@@ -1,0 +1,45 @@
+{
+  "project": "跟着顶会学绘图",
+  "episode": 7,
+  "date": "2026-05-13",
+  "paper": {
+    "title": "GSM-Symbolic: Understanding the Limitations of Mathematical Reasoning in Large Language Models",
+    "venue": "ICLR 2025",
+    "short_name": "GSMSymbolic"
+  },
+  "figures": [
+    {
+      "index": 1,
+      "original_ref": "Figure 3",
+      "chart_type": "sorted_bar",
+      "chart_type_zh": "排序柱形图",
+      "files": {
+        "original": "1.1_原图.png",
+        "generated": "1.2_生成图.png",
+        "comparison": "1.3_对比图.png"
+      }
+    },
+    {
+      "index": 2,
+      "original_ref": "Figure 2",
+      "chart_type": "kde_distribution",
+      "chart_type_zh": "核密度分布图",
+      "files": {
+        "original": "2.1_原图.png",
+        "generated": "2.2_生成图.png",
+        "comparison": "2.3_对比图.png"
+      }
+    },
+    {
+      "index": 3,
+      "original_ref": "Figure 6",
+      "chart_type": "multi_panel_kde",
+      "chart_type_zh": "多子图分布图",
+      "files": {
+        "original": "3.1_原图.png",
+        "generated": "3.2_生成图.png",
+        "comparison": "3.3_对比图.png"
+      }
+    }
+  ]
+}

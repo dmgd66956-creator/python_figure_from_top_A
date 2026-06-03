@@ -1,0 +1,91 @@
+{
+  "paper": {
+    "title": "MMLU-Pro: A More Robust and Challenging Multi-Task Language Understanding Benchmark",
+    "venue": "NeurIPS 2024 (Datasets and Benchmarks Track)",
+    "authors": "Yubo Wang, Xueguang Ma, Ge Zhang, Yuansheng Ni, Abhranil Chandra, et al.",
+    "summary": "本文提出MMLU-Pro，一个更具挑战性和鲁棒性的多任务语言理解基准。通过引入更难的推理问题、将选项从4个扩展到10个、并消除原MMLU中的噪声数据，使得GPT-4o的准确率从88.7%降至72.5%。实验表明该基准对prompt变化的敏感性降低，能更可靠地区分模型能力差异。"
+  },
+
+  "figure1": {
+    "original_ref": "Figure 3",
+    "chart_type": "pie_dual",
+    "description": "MMLU-Pro数据集的学科分布和数据来源分布",
+    "structure": {
+      "subplots": 2,
+      "layout": "1x2",
+      "subplot_a": {"title": "Distribution of Disciplines in MMLU-Pro", "sectors": 14},
+      "subplot_b": {"title": "Data Source Distribution in MMLU-Pro", "sectors": 4}
+    },
+    "data": {
+      "disciplines": {
+        "categories": ["Math", "Physics", "Chemistry", "Law", "Engineering", "Other",
+                       "Economics", "Health", "Psychology", "Business", "Biology",
+                       "Philosophy", "Computer Science", "History"],
+        "values": [11.2, 3.17, 3.41, 4.15, 5.96, 6.56, 6.63, 6.8, 7.01, 7.68, 8.05, 9.15, 9.41, 10.8],
+        "colors_desc": ["dark_blue", "red", "salmon", "purple", "orange", "cyan_light",
+                        "olive", "yellow_green", "magenta", "gold", "dark_red", "teal",
+                        "dark_green", "cyan"]
+      },
+      "data_sources": {
+        "categories": ["Original MMLU Questions", "STEM Website", "TheoremQA", "SciBench"],
+        "values": [33.9, 56.6, 4.97, 4.5],
+        "colors_desc": ["blue", "red/orange", "green/teal", "purple"]
+      }
+    },
+    "source": "Figure 3 标注（百分比直接标注在图中）",
+    "confidence": "精确"
+  },
+
+  "figure2": {
+    "original_ref": "Figure 4",
+    "chart_type": "grouped_bar",
+    "description": "MMLU vs MMLU-Pro 性能对比（10个模型）",
+    "structure": {
+      "subplots": 1,
+      "x_axis": {"meaning": "模型名称", "type": "categorical", "count": 10},
+      "y_axis": {"meaning": "Accuracy (%)", "type": "continuous", "range": [0, 100]},
+      "series_count": 2,
+      "series": [
+        {"name": "MMLU", "color": "#E8A838", "style": "solid fill"},
+        {"name": "MMLU-Pro", "color": "#2E5FA1", "style": "solid fill"}
+      ],
+      "value_annotations": true
+    },
+    "data": {
+      "models": ["GPT-4o", "Claude-3-Opus", "GPT-4-Turbo", "Gemini-1.5-Flash",
+                 "Llama-3-70B-Instruct", "Phi-3-medium-4k-\ninstruct", "Qwen1.5-110B",
+                 "Yi-34B", "Llama-2-70B", "Gemma-7B"],
+      "MMLU": [88.7, 86.8, 86.5, 78.9, 82.0, 78.0, 80.2, 76.3, 69.7, 66.0],
+      "MMLU-Pro": [72.5, 68.5, 63.7, 59.1, 56.2, 53.5, 49.9, 43.0, 37.5, 33.7]
+    },
+    "source": "Figure 4 标注（数值直接标注在柱顶）",
+    "confidence": "精确"
+  },
+
+  "figure3": {
+    "original_ref": "Figure 5",
+    "chart_type": "error_bar_range",
+    "description": "Performance Variability under Different Prompts on MMLU and MMLU-Pro",
+    "structure": {
+      "subplots": 1,
+      "x_axis": {"meaning": "模型名称", "type": "categorical", "count": 6},
+      "y_axis": {"meaning": "Performance Range (%)", "type": "continuous", "range": [10, 80]},
+      "series_count": 2,
+      "series": [
+        {"name": "MMLU", "color": "#4A90D9", "style": "circle marker + error bar"},
+        {"name": "MMLU-Pro", "color": "#E8A050", "style": "triangle marker + error bar"}
+      ],
+      "value_annotations": true
+    },
+    "data": {
+      "models": ["Llama-2-7b-hf", "Mistral-7B-v0.1", "Mistral-7B-\nInstruct-v0.2",
+                 "gemma-7b", "Meta-Llama-3-8B", "Meta-Llama-3-8B-\nInstruct"],
+      "MMLU_low": [34.2, 57.3, 54.5, 58.7, 59.9, 61.4],
+      "MMLU_high": [45.2, 61.5, 60.3, 62.2, 64.8, 66.0],
+      "MMLU_Pro_low": [14.8, 27.5, 22.4, 25.2, 28.7, 33.1],
+      "MMLU_Pro_high": [18.6, 28.7, 25.5, 27.0, 31.5, 35.2]
+    },
+    "source": "Figure 5 标注（数值直接标注在图中）",
+    "confidence": "精确"
+  }
+}
